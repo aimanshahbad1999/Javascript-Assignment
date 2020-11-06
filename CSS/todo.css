@@ -1,0 +1,57 @@
+.category{
+    margin-left: 20px;
+}
+
+.status{
+    margin-left: 40px;
+}
+
+.calender{
+    margin-left: 90px;
+}
+
+.reminder{
+    margin-left: 45px;
+}
+
+.public{
+    margin-left: 56px;
+}
+
+.image{
+    margin-left: 23px;
+}
+
+.pop-up{
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px #888888;
+    width: 30%;
+    position: absolute;
+    top:20%;
+    left:30%;
+    display: none;
+    
+}
+
+.main{
+    display: none;
+}
+
+
+
+
+.display-pop-up{
+    display: block;
+}
+
+#cancel{
+    margin-left:80px;
+    margin-right: 100px;
+    font-weight: bold;
+}
+
+#submit{
+    font-weight: bold;
+  
+}

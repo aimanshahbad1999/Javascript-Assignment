@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./JS/todo.js" defer></script>
+    <link rel="stylesheet" href="./CSS/todo.css">
+    
+</head>
+<body>
+    <div class="main-body">
+    <div class="email"> </div>
+    <div class="pwd"> </div>
+    <section>
+        <form action="./profile.html" method="POST">
+        <input type="submit" value="Update Profile" id="profile">
+        </form>
+    </section>
+    <section>
+        <div class="add-item">
+            <input type="button" value="Add ToDo" id="add-todo">
+            <div class="todo-list">
+                <ul>
+                    
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+    <div class="pop-up">
+    
+        <center> <h2>ADD ITEM</h2></center>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="" ><br>
+        
+
+        <label for="date">Date</label>
+        <span class="calender">
+        <input type="date" id="date" value="" required><br><br>
+        </span>
+
+
+        <label >Task Category:</label>
+        <span class="category" >
+            <input type="radio" id="important" name="category" value="important">
+            <label for="important">Important</label>
+            <input type="radio" id="urgent" name="category" value="urgent">
+            <label for="urgent">Urgent</label>
+            <input type="radio" id="normal" name="category" value="normal">
+            <label for="normal">Normal</label><br><br>
+        </span>
+       
+
+        <label >Task Status</label>
+        <span class="status">
+            <input type="radio" id="done" name="status" value="done">
+            <label for="done">Done</label>
+            <input type="radio" id="active" name="status" value="active">
+            <label for="active">Active</label>
+            <input type="radio" id="pending" name="status" value="pending">
+            <label for="pending">Pending</label><br><br>
+        </span>
+
+        
+        <label > Reminder:</label>
+        <span class="reminder">
+            <input type="radio" id="yes" name="remind" value="yes">
+            <label for="yes">Yes</label>
+            <input type="radio" id="no" name="remind" value="no">
+            <label for="no">No</label><br><br>
+       
+        </span>
+
+        <label > IsPublic:</label>
+        <span class="public">
+            <input type="radio" id="public" name="public" value="public">
+            <label for="public">Public</label><br><br>
+        </span>
+
+        <label for="profile">Upload Image:</label>
+        <span class="image">
+            <input type="file" id="file" required > <br><br>
+        </span><br><br>
+
+        <input type="button" value="Cancel" id="cancel">
+        <input type="submit" value="Submit" id="submit">
+
+
+       
+    </div>
+</body>
+</html>

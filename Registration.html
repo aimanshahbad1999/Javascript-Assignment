@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="CSS/Registration.css">
+    <script  src="./JS/Registration.js" defer></script>
+    
+    
+</head>
+<body>
+
+    <section>
+        <center><div>Registration</div></center>
+    </section>
+    <section id="main">
+        <div class="missing"> </div>
+        <form action="./login.html" method="POST">
+            <label for="email">Email</label><br>
+            <input type="text" id="email" name="email" value="" required >
+            <span class="error-email"> </span><br>
+
+            <label for="fname">First name</label><br>
+            <input type="text" id="fname" name="fname" value="" required>
+            <span class="error-fname"> </span><br>
+
+            <label for="lname">Last name</label><br>
+            <input type="text" id="lname" name="lname" value="" required>
+            <span class="error-lname"> </span><br>
+
+            <label for="pwd">Password:</label><br>
+            <input type="password" id="pwd" name="pwd" required>
+            <span class="error-pwd"> </span><br><br>
+
+
+            <label for="cpwd">Confirm Password:</label><br>
+            <input type="password" id="cpwd" name="cpwd" required>
+            <span class="error-cpwd"> </span><br>
+
+            <label >Gender</label><br>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label><br><br>
+
+            <label for="address">Address:</label><br>
+            <textarea id="address" name="address" rows="4" cols="50" required>
+
+            </textarea><br><br>
+
+            <label for="profile">Upload Profile:</label><br>
+            <input type="file" id="file" required> <br><br>
+
+            <input type="submit" value="Submit" id="submit">
+            <span class="error-submit"></span>
+          </form> 
+          
+    </section>
+   
+</body>
+</html>

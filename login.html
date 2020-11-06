@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./JS/login.js" defer></script>
+    <link rel="stylesheet" href="./CSS/login.css">
+</head>
+<body>
+    <div id="main">
+    <fieldset>
+        <legend>Login</legend>
+        <form action="./todo.html" method="POST" id="the-form">
+            <label for="email">Email</label><br>
+            <input type="text" id="email" name="email" value="" required >
+            <span class="error-email"> </span><br>
+
+            <label for="pwd">Password:</label><br>
+            <input type="password" id="pwd" name="pwd" required>
+            <span class="error-pwd"> </span><br><br>
+
+            <input type="submit" value="Submit" id="submit">
+            <span class="invalid"> </span>
+        </form>
+    </fieldset>
+</div>
+</body>
+</html>

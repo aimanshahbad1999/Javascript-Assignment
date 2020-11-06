@@ -1,0 +1,19 @@
+#main{
+    padding-top: 50px;
+    padding-left: 120px;
+}
+
+#email,#pwd{
+    border: none;
+    border-bottom: 2px solid black;
+    width: 30%;
+}
+
+.error-email,.error-pwd,.invalid{
+    color:red;
+    font-style: italic ;
+}
+
+.resolve{
+    display: none;
+}

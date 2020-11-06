@@ -1,0 +1,22 @@
+
+#main{
+    padding-top: 50px;
+    padding-left: 120px;
+}
+
+#email,#fname,#lname,#pwd,#cpwd{
+    border: none;
+    border-bottom: 2px solid black;
+    width: 30%;
+}
+
+.error-email,.error-fname,.error-lname,.error-pwd,.error-cpwd,.error-submit{
+    color:red;
+    font-style: italic ;
+}
+
+/* .resolve{
+    display: none;
+} */
+
+
