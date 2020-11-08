@@ -1,3 +1,8 @@
+body{
+    padding-left: 30px;
+    padding-right: 60px;
+}
+
 .category{
     margin-left: 20px;
 }
@@ -22,6 +27,14 @@
     margin-left: 23px;
 }
 
+
+#update-profile{
+    margin-top: 100px;
+}
+
+.add-item{
+    margin-top: 50px;
+}
 .pop-up{
     border: 1px solid;
     padding: 10px;
@@ -33,6 +46,38 @@
     display: none;
     
 }
+
+#del-check{
+    margin-left:350px;
+    
+}
+
+#delete{
+    padding-right: 40px;
+}
+ul{
+    padding-left:150px;
+}
+.edit-pop-up{
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px #888888;
+    width: 25%;
+    position: absolute;
+    display: none;
+    top:30%;
+    left:50%; 
+}
+
+.enable{
+    display: block;
+}
+
+.dis{
+    display: none;
+}
+
+
 
 .main{
     display: none;
@@ -54,4 +99,34 @@
 #submit{
     font-weight: bold;
   
+}
+
+ul{
+    top:30%;
+}
+
+li{
+    /* display: flex; */
+    /* flex-direction: column; */
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px #888888;
+    width: 30%;
+    
+}
+
+#delete{
+    width: 20px;
+    height:20px;
+   
+
+}
+
+#edit{
+    width: 20px;
+    height:20px;
+    padding-left:180px ;
+    padding-right: 20px;
+
+
 }
