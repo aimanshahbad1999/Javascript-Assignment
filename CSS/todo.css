@@ -3,6 +3,11 @@ body{
     padding-right: 60px;
 }
 
+#logout{
+    margin-left: 85%;
+    
+}
+
 .category{
     margin-left: 20px;
 }

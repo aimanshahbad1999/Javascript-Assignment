@@ -1,12 +1,13 @@
 #main{
-    padding-top: 50px;
+    padding-top: 130px;
     padding-left: 120px;
+    padding-right: 800px;
 }
 
 #email,#pwd{
     border: none;
     border-bottom: 2px solid black;
-    width: 30%;
+    width: 300px;
 }
 
 .error-email,.error-pwd,.invalid{

@@ -9,6 +9,16 @@
     
 </head>
 <body>
+    <div class="">
+        <img src="" alt="" srcset="" id="get-profile">
+        <label for="">Name:</label>
+        <label id="profile-name"> </label>
+        <br>
+        <label for="">Email:</label>
+        <label id="profile-email"> </label>
+
+
+    </div>
    
     <div class="main-body">
     <div class="email"> </div>
@@ -17,8 +27,39 @@
         <!-- <img src="" alt="" srcset=""> -->
         <form action="./profile.html" method="POST">
         <input type="submit" value="Update Profile" id="profile">
+       
         </form>
+
+        <form action="./login.html" method="post">
+            <input type="submit" value="Logout" id="logout">
+            </form>
     </section>
+    <hr>
+    <div>
+        <label for="sname">Name</label>
+        <input onkeyup="filter()" type="text" id="search" name="search" value="" ><br><br>
+        
+        <label for="sdate">Date</label>
+        <input type="date" id="sdate" value="" ><br><br>
+
+        <label for="scategory">Category:</label>
+        <select name="category" id="scategory">
+            <option value="important">Important</option>
+            <option value="urgent">Urgent</option>
+            <option value="normal">Normal</option>
+        </select><br><br>
+
+        <label for="sstatus">Status:</label>
+        <select name="status" id="sstatus">
+            <option value="done">Done</option>
+            <option value="active">Active</option>
+            <option value="pending">Pending</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     
+      
+
+    </div>
     <hr>
     <section>
         <div class="add-item">
@@ -27,7 +68,7 @@
             <input type="button" value="Delete" id="del-check">
         
             <div class="todo-list">
-                <ul>
+                <ul id="menu">
                     
                     
                 </ul>
