@@ -37,7 +37,7 @@ function load() {
         for (const [key, value] of Object.entries(all_user[i])) {
             if (key == "email" && all_user[i].email == user) {
                 update_user = all_user[i];
-                if (update_user.hasOwnProperty("todo") && update_user.todo.length>1) {
+                if (update_user.hasOwnProperty("todo")) {
                     check = 1;
                 }
 
