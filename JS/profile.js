@@ -7,7 +7,7 @@ const lname = document.getElementById('lname');
 const pwd = document.getElementById('pwd');
 const cpwd = document.getElementById('cpwd');
 const address = document.getElementById('address');
-const file = document.getElementById('file');
+const file = document.getElementById('profileimg');
 const error_pwd = document.querySelector('.error-pwd');
 const submitbtn = document.getElementById('submit');
 
@@ -16,10 +16,30 @@ lname.addEventListener('blur', validateLastName);
 submitbtn.addEventListener('click', submitDetails);
 pwd.addEventListener('blur', checkPassword);
 address.addEventListener('blur', validateAddress);
-file.addEventListener('change', ValidateUpdateProfile);
+// file.addEventListener('change', ValidateUpdateProfile);
 
-
-
+let newFile="";
+function changeFile(){
+    let changePicInput = document.getElementById("profileimg");
+    let reader = new FileReader();
+    reader.readAsDataURL(changePicInput.files[0]);
+    reader.onloadend = function(event) {
+        let Image = document.getElementById("profileimg");
+        Image.src = event.target.result;    
+        newFile=Image.src;
+        alert(newFile);
+        for (let i = 0; i < all_user.length; i++) {
+            for (const [key, value] of Object.entries(all_user[i])) {
+                if (all_user[i].email == user) {
+                    all_user[i].image = newFile;
+                    console.log(newFile);
+                    break;
+                }
+            }
+        }
+        
+    }
+}
 
 let user = sessionStorage.getItem(JSON.stringify("Users"));
 user = JSON.parse(user);
@@ -159,7 +179,8 @@ function ValidateUpdateProfile() {
     for (let i = 0; i < all_user.length; i++) {
         for (const [key, value] of Object.entries(all_user[i])) {
             if (all_user[i].email == user) {
-                all_user[i].file = file.value;
+                all_user[i].image = newFile;
+                console.log(newFile);
                 break;
             }
         }

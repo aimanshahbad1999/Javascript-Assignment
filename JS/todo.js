@@ -11,7 +11,7 @@ const update = document.getElementById('edit-submit');
 const ul = document.querySelector('ul');
 const del_chk = document.getElementById('del-check');
 const logout=document.getElementById('logout');
-const getImage=document.getElementById('get-profile');
+let getImage=document.getElementById('get-profile');
 const getProfileName=document.getElementById('profile-name');
 const getProfileEmail=document.getElementById('profile-email');
 const searchval=document.getElementById('search');
@@ -102,6 +102,7 @@ function alertRem(){
         if(all_user[i].email==user){
             getProfileName.innerHTML=all_user[i].first_name;
             getProfileEmail.innerHTML=all_user[i].email;
+            getImage.src=all_user[i].image;
         if(all_user[i].email==user && all_user[i].hasOwnProperty('todo')){
             for(let j=0;j<all_user[i].todo.length;j++){
                 for (const [key, value] of Object.entries(all_user[i].todo[j])){
@@ -385,6 +386,7 @@ function handelEdit(e) {
         let edit_file = getEditFile();
 
         item = item.querySelector('.name').innerHTML;
+        console.log(item);
         let user = sessionStorage.getItem(JSON.stringify("Users"));
         user = JSON.parse(user);
 

@@ -1,6 +1,7 @@
 
 let main_check=0;
 const a=[];
+let newFile="";
 const regex_email = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
 const regex_fname=/^([a-zA-Z0-9]+)/;
 const regex_lname=/^([a-zA-Z0-9]+)/;
@@ -20,6 +21,21 @@ fname.addEventListener('blur',validateFirstName);
 lname.addEventListener('blur',validateLastName);
 submitbtn.addEventListener('click',submitDetails);
 pwd.addEventListener('blur',checkPassword);
+
+
+
+function changeFile(){
+    let changePicInput = document.getElementById("profileimg");
+    let reader = new FileReader();
+    reader.readAsDataURL(changePicInput.files[0]);
+    reader.onloadend = function(event) {
+        let Image = document.getElementById("profileimg");
+        Image.src = event.target.result;    
+        console.log(Image); 
+        newFile=Image.src;
+        console.log(newFile);
+    }
+}
 
 let emailcheck=0;
 let fcount=0;
@@ -129,9 +145,6 @@ function radioValue(){
 
 
 function submitDetails(){
-    console.log(emailcheck);
-    console.log(pwdcheck);
-    // console.log(count);
     if(pwdcheck==0 && emailcheck==0 && fcount==1 && lcount==1 && cpcount==1 && pcount==1){
         let radio=radioValue();
         let user={
@@ -141,7 +154,7 @@ function submitDetails(){
             password:cpwd.value,
             gender:radio,
             address:address.value,
-            image:file.value
+            image:newFile
         };
         let item=localStorage.getItem("Users");
         item=JSON.parse(item);
