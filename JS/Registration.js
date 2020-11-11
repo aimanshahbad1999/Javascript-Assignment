@@ -21,7 +21,8 @@ lname.addEventListener('blur',validateLastName);
 submitbtn.addEventListener('click',submitDetails);
 pwd.addEventListener('blur',checkPassword);
 
-let emailcheck=0
+let emailcheck=0;
+let fcount=0;
 function validateEmail(){
     let error_email=document.querySelector(".error-email");
     if(regex_email.test(email.value)){
@@ -31,7 +32,10 @@ function validateEmail(){
         let all_user = localStorage.getItem("Users");
         all_user = JSON.parse(all_user);
         for(let i=0;i<all_user.length;i++){
+                console.log(all_user.email);
+                console.log(email.value);
                 if(all_user[i].email==email.value){
+                    console.log("already exist");
                     emailcheck=1;
                 }else{
                     emailcheck=0;
@@ -50,16 +54,23 @@ function validateFirstName(){
     let error_fname=document.querySelector(".error-fname");
     if(regex_fname.test(fname.value)){
         error_fname.innerHTML=" ";
+        fcount=1;
+        submitbtn.disabled=false;
+        
     }
     else{
         error_fname.innerHTML="Enter Alphabet only";
     }
 }
 
+let lcount=0;
  function validateLastName(){
     let error_lname=document.querySelector(".error-lname");
     if(regex_lname.test(lname.value)){
         error_lname.innerHTML=" ";
+        lcount=1;
+        submitbtn.disabled=false;
+        
     }
     else{
         error_lname.innerHTML="Enter Alphabet only";
@@ -68,11 +79,14 @@ function validateFirstName(){
 
 
 let check=0;
+let pcount=0;
+let cpcount=0
 function checkPassword(){
     if(((pwd.value).length)>6){
         check=1;
         submitbtn.disabled = false;
         error_pwd.innerHTML=" ";
+        pcount=1;
     }
     else{
         error_pwd.innerHTML="Password length should be greater than 6";
@@ -92,11 +106,12 @@ function confirmPassword(){
         if (pwd.value === cpwd.value){
             pwdcheck=0;
             error_cpwd.innerHTML=" ";
+            cpcount=1;
             submitbtn.disabled=false;
         }
         else{
             error_cpwd.innerHTML="Password Mismatch";
-            pwdcheck=1
+            pwdcheck=1;
         }
     }
 }
@@ -114,7 +129,10 @@ function radioValue(){
 
 
 function submitDetails(){
-    if(pwdcheck==0 && emailcheck==0){
+    console.log(emailcheck);
+    console.log(pwdcheck);
+    // console.log(count);
+    if(pwdcheck==0 && emailcheck==0 && fcount==1 && lcount==1 && cpcount==1 && pcount==1){
         let radio=radioValue();
         let user={
             email:email.value,
