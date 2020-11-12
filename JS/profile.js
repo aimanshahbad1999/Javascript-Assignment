@@ -1,3 +1,16 @@
+
+
+    window.addEventListener("DOMContentLoaded",function(){
+        let user = sessionStorage.getItem(JSON.stringify("Users"));
+        user = JSON.parse(user);
+        if(user==null){
+            window.location='login.html';
+        }
+    });
+    
+
+
+
 const regex_fname = /^([a-zA-Z0-9]+)/;
 const regex_lname = /^([a-zA-Z0-9]+)/;
 
@@ -27,7 +40,7 @@ function changeFile(){
         let Image = document.getElementById("profileimg");
         Image.src = event.target.result;    
         newFile=Image.src;
-        alert(newFile);
+       
         for (let i = 0; i < all_user.length; i++) {
             for (const [key, value] of Object.entries(all_user[i])) {
                 if (all_user[i].email == user) {

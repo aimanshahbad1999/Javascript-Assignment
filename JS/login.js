@@ -56,10 +56,13 @@ function login(){
         submit.disabled=false;
         for(const [key,value] of Object.entries(user)){           
             if(key=="password" && user["password"]==pwd.value){
+
                 submit.disabled=false;
                 submit_error.innerHTML="";
                 sessionStorage.clear();
                 sessionStorage.setItem(JSON.stringify("Users"),JSON.stringify(user.email));
+               
+                // window.location='todo.html';
                 break;
             }
             else{ 

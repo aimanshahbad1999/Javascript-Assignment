@@ -1,5 +1,24 @@
 
 
+    window.addEventListener("DOMContentLoaded",function(){
+        let user = sessionStorage.getItem(JSON.stringify("Users"));
+        user = JSON.parse(user);
+        if(user==null){
+            window.location='login.html';
+        }
+    });
+   
+    // window.onload = function() {
+    //     if(sessionStorage.getItem("Users")==null){
+    //                 window.location='login.html';
+    //             }
+    //             else{
+
+    //             }
+        
+    //   };
+
+
 
 
 const addTodo = document.getElementById('add-todo');
@@ -87,7 +106,6 @@ function load() {
 }
 
 function callAlert(r){
-    alert(r);
     window.location="todo.html";
 }
 
@@ -660,12 +678,4 @@ function cancelItem() {
 
 
 
-// function preventBack(){
-//     window.history.forward();
-// }
-
-// setTimeout("preventBack()",0);
-// window.onunload=function(){
-//     null
-// };
 
