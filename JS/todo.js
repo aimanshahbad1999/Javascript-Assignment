@@ -75,9 +75,7 @@ function load() {
             let newElm = document.createElement('li');
             newElm.className = "a";
             let content = `
-    <div>
-    <img src="${todo[i].image}" alt="" srcset="">
-    </div>
+    
     <div>
     <label>Name:</label>
     <label class="name">${todo[i].name}</label><br>
@@ -401,7 +399,7 @@ function handelEdit(e) {
         let edit_status = getEditStatus();
         let edit_reminder = getEditReminder();
         let edit_public = getEditPublic();
-        let edit_file = getEditFile();
+        // let edit_file = getEditFile();
 
         item = item.querySelector('.name').innerHTML;
         console.log(item);
@@ -458,11 +456,11 @@ function handelEdit(e) {
 
                                 }
 
-                                if (edit_file != undefined) {
+                                // if (edit_file != undefined) {
                                     
-                                    all_user[i].todo[j].image = edit_file;
+                                //     all_user[i].todo[j].image = edit_file;
 
-                                }
+                                // }
 
                                
                                 localStorage.setItem("Users", JSON.stringify(all_user));
@@ -640,9 +638,6 @@ function submitItem() {
 
     let newElm = document.createElement('li');
     let content = `
-    <div>
-    <img src="${item.image}" alt="" srcset="">
-    </div>
     <div>
     <label>Name:</label>
     <label class="name">${item.name}</label><br>
