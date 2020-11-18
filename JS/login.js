@@ -47,28 +47,45 @@ function getDetails(){
 
 function login(){
     const user=getDetails();
-    if (user==undefined){
-        alert("User not exist ");
-        submit.disabled=true;
-    }
-    else{
-        let submit_error= document.querySelector('.invalid');
-        submit.disabled=false;
-        for(const [key,value] of Object.entries(user)){           
-            if(key=="password" && user["password"]==pwd.value){
+    let submit_error= document.querySelector('.invalid');
+    if((email.value==="")  && (pwd.value==="")){
+        console.log("Enter Email and Password");
+        submit_error.innerHTML="Enter Email and Password";  
+    }else if(email.value===""){
+        console.log("Enter Email");
+        submit_error.innerHTML="Enter Email";  
 
-                submit.disabled=false;
-                submit_error.innerHTML="";
-                sessionStorage.clear();
-                sessionStorage.setItem(JSON.stringify("Users"),JSON.stringify(user.email));
-               
-                // window.location='todo.html';
-                break;
-            }
-            else{ 
-                submit.disabled=true;
-                submit_error.innerHTML="Invalid credential";        
+    }else if(pwd.value===""){
+        console.log("Enter Password");
+        submit_error.innerHTML="Enter Password";  
+
+    }else{
+
+        if (user==undefined){
+            alert("User not exist ");
+            submit.disabled=true;
+        }
+        else{
+            
+            submit.disabled=false;
+            for(const [key,value] of Object.entries(user)){           
+                if(key=="password" && user["password"]==pwd.value){
+    
+                    submit.disabled=false;
+                    submit_error.innerHTML="";
+                    sessionStorage.clear();
+                    sessionStorage.setItem(JSON.stringify("Users"),JSON.stringify(user.email));
+                   
+                    // window.location='todo.html';
+                    break;
+                }
+                else{ 
+                    submit.disabled=true;
+                    submit_error.innerHTML="Invalid credential";        
+                    }
                 }
             }
-        }
+    }
+
+    
 }

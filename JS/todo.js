@@ -581,7 +581,7 @@ function submitItem() {
     let item_status = getStatus();
     let item_reminder = getReminder();
     let item_public = getPublic();
-    let item_file = getFile();
+    // let item_file = getFile();
 
     const item = {
         name: item_name,
@@ -589,11 +589,7 @@ function submitItem() {
         category: item_category,
         status: item_status,
         reminder: item_reminder,
-        public: item_public,
-        image: item_file
-
-
-
+        public: item_public
     };
    
 

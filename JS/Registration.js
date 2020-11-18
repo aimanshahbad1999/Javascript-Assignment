@@ -3,8 +3,8 @@ let main_check=0;
 const a=[];
 let newFile="";
 const regex_email = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
-const regex_fname=/^([a-zA-Z0-9]+)/;
-const regex_lname=/^([a-zA-Z0-9]+)/;
+const regex_fname=/^[A-Za-z. ]+$/;
+const regex_lname=/^[A-Za-z. ]+$/;
 const email = document.getElementById('email');
 const fname=document.getElementById('fname');
 const lname=document.getElementById('lname');
@@ -98,15 +98,37 @@ let check=0;
 let pcount=0;
 let cpcount=0
 function checkPassword(){
-    if(((pwd.value).length)>6){
+    if((pwd.value).length<8){
+        error_pwd.innerHTML="Password length should be 8 character";
+    }
+    else if((pwd.value).search(/[0-9]/)===-1){
+        error_pwd.innerHTML="Password must contain atleast one numric value";
+    }
+    else if((pwd.value).search(/[a-z]/)===-1){
+        error_pwd.innerHTML="Password must contain atleast one small letter";
+    }
+    else if((pwd.value).search(/[A-Z]/)===-1){
+        error_pwd.innerHTML="Password must contain atleast one capital letter";
+    }
+    else if((pwd.value).search(/[!\@\#\$\%\^\&\*\(\)\_\+\-\:\;]/)===-1){
+        error_pwd.innerHTML="Password must contain atleast one special character";
+    }else{
         check=1;
         submitbtn.disabled = false;
         error_pwd.innerHTML=" ";
         pcount=1;
+
     }
-    else{
-        error_pwd.innerHTML="Password length should be greater than 6";
-    }
+
+
+
+
+    // if(((pwd.value).length)>6){
+        
+    // }
+    // else{
+    //     error_pwd.innerHTML="Password length should be greater than 6";
+    // }
 
 }
 
