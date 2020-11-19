@@ -291,6 +291,7 @@ function ValidateUpdateProfile() {
 
 function submitDetails() {
 
+    radioValue();
     if (pwdcheck == 0 && check==0) {
         localStorage.setItem("Users", JSON.stringify(all_user));
         alert("Profile Updated");
