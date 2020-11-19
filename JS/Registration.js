@@ -38,21 +38,26 @@ function changeFile(){
 }
 
 let emailcheck=0;
+let emailvalid=0;
 let fcount=0;
 function validateEmail(){
     let error_email=document.querySelector(".error-email");
     if(regex_email.test(email.value)){
+        emailvalid=0;
         error_email.innerHTML=" "; 
         let user = sessionStorage.getItem(JSON.stringify("Users"));
         user = JSON.parse(user);
         let all_user = localStorage.getItem("Users");
         all_user = JSON.parse(all_user);
         for(let i=0;i<all_user.length;i++){
+                console.log("********");
                 console.log(all_user.email);
                 console.log(email.value);
                 if(all_user[i].email==email.value){
+
                     console.log("already exist");
                     emailcheck=1;
+                    break;
                 }else{
                     emailcheck=0;
                     submitbtn.disabled=false;
@@ -62,6 +67,7 @@ function validateEmail(){
     }
     else{
         error_email.innerHTML="Enter Valid Email";
+        emailvalid=1;
     }
 }
 
@@ -167,10 +173,21 @@ function radioValue(){
 
 
 function submitDetails(){
-    if(pwdcheck==0 && emailcheck==0 && fcount==1 && lcount==1 && cpcount==1 && pcount==1){
+    let error_submit=document.querySelector('.error-submit');
+    if(emailcheck==1){
+        error_submit.innerHTML="Email Already Exist";
+        alert("Email Already Exist");
+        submitbtn.disabled = true;
+    }else if(emailvalid==1){
+        error_submit.innerHTML="Email Invalid";
+        submitbtn.disabled = true;
+
+    }
+    else if(pwdcheck==0 && emailcheck==0 && fcount==1 && lcount==1 && cpcount==1 && pcount==1){
+        error_submit.innerHTML="";
         let radio=radioValue();
         let user={
-            email:email.value,
+            email:(email.value).toLowerCase(),
             first_name:fname.value,
             last_name:lname.value,
             password:cpwd.value,
@@ -183,19 +200,17 @@ function submitDetails(){
         if(item==null){
             a.push(user);
             localStorage.setItem("Users",JSON.stringify(a));
+            alert("Registration Successful");
         }
         else{
             item.push(user);
             localStorage.setItem("Users",JSON.stringify(item));  
+            alert("Registration Successful");
         }
-    }
-    else if(emailcheck==1){
-        alert("Email Already Exist");
-        submitbtn.disabled = true;
     }
     else{
         submitbtn.disabled = true;
-        let error_submit=document.querySelector('.error-submit');
+        
         error_submit.innerHTML="check confirm password or some filed missing";
     }
     } 

@@ -30,7 +30,7 @@ function getDetails(){
     users=JSON.parse(users);
     for(i=0;i<users.length;i++){
         for(const [key,value] of Object.entries(users[i])){
-            if(key=="email" && users[i]["email"]==email.value){
+            if(key=="email" && users[i]["email"]==(email.value).toLowerCase()){
                 valid_user=users[i];
                 check=check+1;
                 break;
@@ -75,6 +75,7 @@ function login(){
                     submit_error.innerHTML="";
                     sessionStorage.clear();
                     sessionStorage.setItem(JSON.stringify("Users"),JSON.stringify(user.email));
+                    alert("Successfully logged In");
                    
                     // window.location='todo.html';
                     break;
