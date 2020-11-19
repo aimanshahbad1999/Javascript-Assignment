@@ -53,7 +53,7 @@ function validateEmail(){
                 console.log("********");
                 console.log(all_user.email);
                 console.log(email.value);
-                if(all_user[i].email==email.value){
+                if(all_user[i].email==(email.value).toLowerCase()){
 
                     console.log("already exist");
                     emailcheck=1;
