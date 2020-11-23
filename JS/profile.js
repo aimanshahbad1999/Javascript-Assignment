@@ -38,6 +38,8 @@ address.addEventListener('blur', validateAddress);
 // file.addEventListener('change', ValidateUpdateProfile);
 
 
+
+
 function load() {
     let user1 = sessionStorage.getItem(JSON.stringify("Users"));
     user1 = JSON.parse(user1);
@@ -88,10 +90,29 @@ load();
 
 
 
+function checkValidImage(){
+    let img_RegEx=/.(gif|jpe|jpeg|JPG|JPEG|PNG|png|webp|bmp)$/i;
+    return img_RegEx.test(file.value);
+}
 
 
 let newFile = "";
+let image_count=0;
+let image_selected=0;
 function changeFile() {
+    submitbtn.disabled = false;
+    image_selected=1;
+
+    let image_valid=checkValidImage();
+    
+    if(image_valid==true){
+        console.log("Hello Everyone");
+        image_count=1;
+    }
+    else{
+        image_count=0;
+    }
+
     let changePicInput = document.getElementById("profileimg");
     let reader = new FileReader();
     reader.readAsDataURL(changePicInput.files[0]);
@@ -292,7 +313,12 @@ function ValidateUpdateProfile() {
 function submitDetails() {
 
     radioValue();
-    if (pwdcheck == 0 && check==0) {
+    if(image_selected==1 && image_count==0){
+        error_submit.innerHTML = "Invalid File";
+        submitbtn.disabled = true;
+
+    }
+    else if (pwdcheck == 0 && check==0) {
         localStorage.setItem("Users", JSON.stringify(all_user));
         alert("Profile Updated");
 

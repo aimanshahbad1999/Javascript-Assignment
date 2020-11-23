@@ -21,10 +21,30 @@ fname.addEventListener('blur',validateFirstName);
 lname.addEventListener('blur',validateLastName);
 submitbtn.addEventListener('click',submitDetails);
 pwd.addEventListener('blur',checkPassword);
+// file.addEventListener('click',checkValidImage);
 
 
 
+function checkValidImage(){
+    let img_RegEx=/.(gif|jpe|jpeg|JPG|JPEG|PNG|png|webp|bmp)$/i;
+    return img_RegEx.test(file.value);
+}
+
+let image_count=0
 function changeFile(){
+  
+    
+    submitbtn.disabled = false;
+
+    let image_valid=checkValidImage();
+    
+    if(image_valid==true){
+        console.log("Hello Everyone");
+        image_count=1;
+    }
+    else{
+        image_count=0;
+    }
     let changePicInput = document.getElementById("profileimg");
     let reader = new FileReader();
     reader.readAsDataURL(changePicInput.files[0]);
@@ -183,7 +203,12 @@ function submitDetails(){
         submitbtn.disabled = true;
 
     }
-    else if(pwdcheck==0 && emailcheck==0 && fcount==1 && lcount==1 && cpcount==1 && pcount==1){
+    else if(image_count==0){
+        
+        error_submit.innerHTML="Invalid File";
+        submitbtn.disabled = true;
+    }
+    else if(pwdcheck==0 && emailcheck==0 && fcount==1 && lcount==1 && cpcount==1 && pcount==1 && image_count==1){
         error_submit.innerHTML="";
         let radio=radioValue();
         let user={

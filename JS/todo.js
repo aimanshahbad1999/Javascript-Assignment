@@ -30,6 +30,7 @@ const submit = document.getElementById('submit');
 const cancel = document.getElementById('cancel');
 const update = document.getElementById('edit-submit');
 const ul = document.querySelector('ul');
+const ul1=document.querySelector('.add-reminder');
 const del_chk = document.getElementById('del-check');
 const logout = document.getElementById('logout');
 let getImage = document.getElementById('get-profile');
@@ -42,7 +43,21 @@ const searchStatus = document.getElementById('sstatus');
 const edit_cancel = document.getElementById('edit-cancel');
 const edit_submit = document.getElementById('edit-submit');
 const edit_pop_up = document.querySelector('.edit-pop-up');
+let get_date=document.getElementById('date');
+let edit_get_date=document.getElementById('edate');
 
+get_date.addEventListener('click',()=>{
+    console.log("hello");
+    let today=new Date().toISOString().slice(0, 10);
+    get_date.setAttribute("min",today);
+});
+
+
+edit_get_date.addEventListener('click',()=>{
+    console.log("hello");
+    let today=new Date().toISOString().slice(0, 10);
+    edit_get_date.setAttribute("min",today);
+});
 
 const multi_li_del = [];
 
@@ -129,6 +144,61 @@ function load() {
 
     }
 
+    for (let i = 0; i < all_user.length; i++) {
+        for (const [key, value] of Object.entries(all_user[i])) {
+            if (key == "email" && all_user[i].email == user) {
+                reminder_data = all_user[i];
+                if (reminder_data.hasOwnProperty("todo")) {
+                    console.log("inside 1");
+                    for (let j = 0; j < all_user[i].todo.length; j++) {
+                        for (const [key, value] of Object.entries(all_user[i].todo[j])) {
+                            let today = new Date().toISOString().slice(0, 10);
+                            console.log(today);
+                            
+                            if(key=="date" && all_user[i].todo[j].date==today && all_user[i].todo[j].status!="done"){
+                                console.log("inside 2");
+                               
+                                    console.log("inside 3");
+                                    
+                                    let newElm1 = document.createElement('li');
+                                    
+                                    let content1 = `
+    
+                                                    <div>
+                                                    <label>Name:</label>
+                                                    <label class="name">${all_user[i].todo[j].name}</label><br>
+                                                    <label>Date:</label>
+                                                    <label>${all_user[i].todo[j].date}</label><br>
+                                                    <label>Category:</label>
+                                                    <label>${all_user[i].todo[j].category}</label><br>
+                                                    <label>Status:</label>
+                                                    <label>${all_user[i].todo[j].status}</label><br>
+                                                    </div><br>
+
+                                                    `;
+
+                                    newElm1.innerHTML=content1;
+                                    newElm1.classList.add("li1");
+                                    ul1.appendChild(newElm1);
+                                    
+
+                                
+                            }
+
+
+                        }
+
+
+                    }
+
+
+                }
+
+            }
+            
+        }
+    }
+
 
 }
 
@@ -173,7 +243,7 @@ function alertRem() {
 
 
 load();
-alertRem();
+// alertRem();
 
 
 
@@ -420,11 +490,15 @@ function handelEdit(e) {
 
     edit_pop_up.classList.remove('dis');
     edit_pop_up.classList.add('enable');
+    reminder_alert.classList.add("dis");
+    reminder_text.classList.add("dis");
 
 
     let item = e;
 
     edit_submit.addEventListener('click', () => {
+        reminder_text.classList.remove("dis");
+        reminder_alert.classList.remove("dis");
         let edit_name = getEditName();
         let edit_date = getEditDate();
         let edit_category = getEditCategory();
@@ -514,7 +588,7 @@ function handelEdit(e) {
                 }
             }
         }
-
+        
     });
 }
 
@@ -523,23 +597,31 @@ edit_cancel.addEventListener('click', handelEditcancel);
 
 function handelEditcancel() {
     edit_pop_up.classList.add('dis');
+    reminder_alert.classList.remove("dis");
+    reminder_text.classList.remove("dis");
 
 }
 
 
-
+let reminder_alert=document.querySelector(".reminder-alert");
+let reminder_text=document.querySelector(".reminder-text");
 function addTask() {
 
     pop_up.classList.remove('edit-pop-up');
     main_body.classList.add("main");
     pop_up.classList.add("display-pop-up");
+    reminder_alert.classList.add("dis");
+    reminder_text.classList.add("dis");
+
+
+
 
 }
 
 function getDate() {
 
-    let new_date;
-    const date = document.getElementById('date').value;
+
+    let date = document.getElementById('date').value;
     new_date = date;
     date.value = '';
 
@@ -662,6 +744,8 @@ function getReminderDate(id) {
 
 function submitItem() {
 
+    reminder_text.classList.remove("dis");
+    reminder_alert.classList.remove("dis");
 
     let item_name = getName();
     let item_date = undefined;
@@ -811,6 +895,8 @@ function submitItem() {
 function cancelItem() {
     pop_up.classList.remove("display-pop-up");
     main_body.classList.remove("main");
+    reminder_alert.classList.remove("dis");
+    reminder_text.classList.remove("dis");
 
 }
 

@@ -154,3 +154,41 @@ li{
 
 
 }
+
+.reminder-text{
+    position: absolute;
+    right:20%;
+    top:70%;
+    color: red;
+    
+   
+}
+
+.reminder-alert{
+    position: absolute;
+    right:21%;
+    top:70%;
+    color: red;
+  
+   
+    
+    
+}
+
+.add-reminder{
+  
+    /* border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px #888888;
+    width:100%; */
+ 
+    margin-top: 20%;
+
+}
+
+.li1{
+     border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px #888888;
+    width:100%;
+}
