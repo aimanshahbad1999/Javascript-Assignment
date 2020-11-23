@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="./JS/todo.js" defer></script>
     <link rel="stylesheet" href="./CSS/todo.css">
-    
+
 </head>
+
 <body>
     <div class="">
         <img src="" alt="" srcset="" id="get-profile" style="height: 150px; width: 150px;"><br>
@@ -19,80 +21,81 @@
 
 
     </div>
-   
+
     <div class="main-body">
-    <div class="email"> </div>
-    <div class="pwd"> </div>
-    <section id="update-profile">
-        <!-- <img src="" alt="" srcset=""> -->
-        <form action="./profile.html" method="POST">
-        <input type="submit" value="Update Profile" id="profile">
-       
-        </form>
+        <div class="email"> </div>
+        <div class="pwd"> </div>
+        <section id="update-profile">
+            <!-- <img src="" alt="" srcset=""> -->
+            <form action="./profile.html" method="POST">
+                <input type="submit" value="Update Profile" id="profile">
 
-        <form action="./login.html" method="post">
-            <input type="submit" value="Logout" id="logout">
             </form>
-    </section>
-    <hr>
-    <div>
-        <label for="sname">Name</label>
-        <input onkeyup="filter()" type="text" id="search" name="search" value="" ><br><br>
-        
-        <label for="sdate">Date</label>
-        <input type="date" id="sdate" value="" ><br><br>
 
-        <label for="scategory">Category:</label>
-        <select name="category" id="scategory">
-            <option value="important">Important</option>
-            <option value="urgent">Urgent</option>
-            <option value="normal">Normal</option>
-        </select><br><br>
+            <form action="./login.html" method="post">
+                <input type="submit" value="Logout" id="logout">
+            </form>
+        </section>
+        <hr>
+        <div>
+            <label for="sname">Name</label>
+            <input onkeyup="filter()" type="text" id="search" name="search" value=""><br><br>
 
-        <label for="sstatus">Status:</label>
-        <select name="status" id="sstatus">
-            <option value="done">Done</option>
-            <option value="active">Active</option>
-            <option value="pending">Pending</option>
-        </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-     
-      
+            <label for="sdate">Date</label>
+            <input type="date" id="sdate" value=""><br><br>
+
+            <label for="scategory">Category:</label>
+            <select name="category" id="scategory">
+                <option value="important">Important</option>
+                <option value="urgent">Urgent</option>
+                <option value="normal">Normal</option>
+            </select><br><br>
+
+            <label for="sstatus">Status:</label>
+            <select name="status" id="sstatus">
+                <option value="done">Done</option>
+                <option value="active">Active</option>
+                <option value="pending">Pending</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+        </div>
+        <hr>
+        <section>
+            <div class="add-item">
+                <input type="button" value="Add ToDo" id="add-todo">
+
+                <input type="button" value="Delete" id="del-check">
+                <br><br>
+                <input type="button" value="Refresh" id="refresh">
+
+
+                <div class="todo-list">
+                    <ul id="menu">
+
+
+                    </ul>
+                </div>
+            </div>
+        </section>
 
     </div>
-    <hr>
-    <section>
-        <div class="add-item">
-            <input type="button" value="Add ToDo" id="add-todo">
-            
-            <input type="button" value="Delete" id="del-check">
-        
-            <div class="todo-list">
-                <ul id="menu">
-                    
-                    
-                </ul>
-            </div>
-        </div>
-    </section>
-    
-</div>
     <div class="pop-up">
-    
-        <center> <h2>ADD ITEM</h2></center>
+
+        <center>
+            <h2>ADD ITEM</h2>
+        </center>
 
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" value="" ><br>
-        
-
-        <label for="date">Date</label>
-        <span class="calender">
-        <input type="date" id="date" value="" ><br><br>
-        </span>
+        <input type="text" id="name" name="name" value=""><br>
 
 
-        <label >Task Category:</label>
-        <span class="category" >
+
+
+        <label>Task Category:</label>
+        <span class="category">
             <input type="radio" id="important" name="category" value="important">
             <label for="important">Important</label>
             <input type="radio" id="urgent" name="category" value="urgent">
@@ -100,9 +103,9 @@
             <input type="radio" id="normal" name="category" value="normal">
             <label for="normal">Normal</label><br><br>
         </span>
-       
 
-        <label >Task Status</label>
+
+        <label>Task Status</label>
         <span class="status">
             <input type="radio" id="done" name="status" value="done">
             <label for="done">Done</label>
@@ -112,17 +115,25 @@
             <label for="pending">Pending</label><br><br>
         </span>
 
-        
-        <label > Reminder:</label>
+
+        <label> Reminder:</label>
         <span class="reminder">
             <input type="radio" id="yes" name="remind" value="yes">
             <label for="yes">Yes</label>
             <input type="radio" id="no" name="remind" value="no">
             <label for="no">No</label><br><br>
-       
+
         </span>
 
-        <label > IsPublic:</label>
+        <!-- <div class="show-date">
+        <label for="date">Date</label>
+        <span class="calender">
+        <input type="date" id="date" value="" ><br><br>
+        </span>
+        </div> -->
+
+
+        <label> IsPublic:</label>
         <span class="public">
             <input type="radio" id="public" name="public" value="public">
             <label for="public">Public</label><br><br>
@@ -132,28 +143,45 @@
 
         <input type="button" value="Cancel" id="cancel">
         <input type="submit" value="Submit" id="submit">
-       
 
 
-       
+
+
     </div>
+    
+    <div class="show-date">
+        <form id="form-rest">
+        <div>
+            Select Reminder Date:
+        </div><br>
+        <label for="date">Date</label>
+        <span class="calender">
+            <input type="date" id="date" value=""><br><br>
+        </span>
+
+        <input type="button" value="Add Reminder" id="add-reminder">
+    </form>
+    </div>
+    
 
     <div class="edit-pop-up">
-    
-        <center> <h2>Update ITEM</h2></center>
+
+        <center>
+            <h2>Update ITEM</h2>
+        </center>
 
         <label for="ename">Name</label>
-        <input type="text" id="ename" name="name" value="" ><br>
-        
+        <input type="text" id="ename" name="name" value=""><br>
+
 
         <label for="edate">Date</label>
         <span class="ecalender">
-        <input type="date" id="edate" value="" ><br><br>
+            <input type="date" id="edate" value=""><br><br>
         </span>
 
 
-        <label >Task Category:</label>
-        <span class="ecategory" >
+        <label>Task Category:</label>
+        <span class="ecategory">
             <input type="radio" id="eimportant" name="ecategory" value="important">
             <label for="eimportant">Important</label>
             <input type="radio" id="eurgent" name="ecategory" value="urgent">
@@ -161,9 +189,9 @@
             <input type="radio" id="enormal" name="ecategory" value="normal">
             <label for="enormal">Normal</label><br><br>
         </span>
-       
 
-        <label >Task Status</label>
+
+        <label>Task Status</label>
         <span class="estatus">
             <input type="radio" id="edone" name="estatus" value="done">
             <label for="edone">Done</label>
@@ -173,17 +201,17 @@
             <label for="epending">Pending</label><br><br>
         </span>
 
-        
-        <label > Reminder:</label>
+
+        <label> Reminder:</label>
         <span class="ereminder">
             <input type="radio" id="eyes" name="eremind" value="yes">
             <label for="eyes">Yes</label>
             <input type="radio" id="eno" name="eremind" value="no">
             <label for="eno">No</label><br><br>
-       
+
         </span>
 
-        <label > IsPublic:</label>
+        <label> IsPublic:</label>
         <span class="epublic">
             <input type="radio" id="epublic" name="epublic" value="public">
             <label for="epublic">Public</label><br><br>
@@ -195,8 +223,9 @@
         <input type="submit" value="Update" id="edit-submit">
 
 
-       
+
     </div>
 
 </body>
+
 </html>
