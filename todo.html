@@ -19,6 +19,8 @@
         <label for="">Email:</label>
         <label id="profile-email"> </label>
 
+        
+
 
     </div>
 
@@ -38,11 +40,18 @@
         </section>
         <hr>
         <div>
+
+            <label for="sdate">Start Date</label>
+            <input type="date" id="sdate" value="">
+
+            <span  class="searchdate">
+            <label for="sdate1">End Date</label>
+            <input type="date" id="sdate1" value="" >
+            </span>
+            <br><br>
+
             <label for="sname">Name</label>
             <input onkeyup="filter()" type="text" id="search" name="search" value=""><br><br>
-
-            <label for="sdate">Date</label>
-            <input type="date" id="sdate" value=""><br><br>
 
             <label for="scategory">Category:</label>
             <select name="category" id="scategory">
@@ -60,7 +69,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
-
+            
         </div>
         <hr>
         <section>
@@ -75,6 +84,9 @@
                 <div class="todo-list">
                     <ul id="menu">
 
+
+                    </ul>
+                    <ul class="add-li">
 
                     </ul>
                 </div>
@@ -139,10 +151,15 @@
             <label for="public">Public</label><br><br>
         </span>
 
-        <br><br>
+      
+
+        <label for="img">Upload Image:</label>
+           
+            <input type="file" id="img" name="todo-img" onchange="changeImg()" accept="image/*" required> <br><br>
 
         <input type="button" value="Cancel" id="cancel">
         <input type="submit" value="Submit" id="submit">
+        <label class="invalid-image"></label>
 
 
 

@@ -22,15 +22,16 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
 const addTodo = document.getElementById('add-todo');
-const refresh=document.getElementById('refresh');
+const refresh = document.getElementById('refresh');
 const pop_up = document.querySelector('.pop-up');
 const show_date = document.querySelector('.show-date');
 const main_body = document.querySelector('.main-body');
 const submit = document.getElementById('submit');
+let invalid_img=document.querySelector('.invalid-image');
 const cancel = document.getElementById('cancel');
 const update = document.getElementById('edit-submit');
 const ul = document.querySelector('ul');
-const ul1=document.querySelector('.add-reminder');
+const ul1 = document.querySelector('.add-reminder');
 const del_chk = document.getElementById('del-check');
 const logout = document.getElementById('logout');
 let getImage = document.getElementById('get-profile');
@@ -38,33 +39,35 @@ const getProfileName = document.getElementById('profile-name');
 const getProfileEmail = document.getElementById('profile-email');
 const searchval = document.getElementById('search');
 const searchDate = document.getElementById('sdate');
+const searchDate1 = document.getElementById('sdate1');
+const date_search = document.querySelector(".searchdate");
 const searchCat = document.getElementById('scategory');
 const searchStatus = document.getElementById('sstatus');
 const edit_cancel = document.getElementById('edit-cancel');
 const edit_submit = document.getElementById('edit-submit');
 const edit_pop_up = document.querySelector('.edit-pop-up');
-let get_date=document.getElementById('date');
-let edit_get_date=document.getElementById('edate');
+let get_date = document.getElementById('date');
+let edit_get_date = document.getElementById('edate');
 
-get_date.addEventListener('click',()=>{
+get_date.addEventListener('click', () => {
     console.log("hello");
-    let today=new Date().toISOString().slice(0, 10);
-    get_date.setAttribute("min",today);
+    let today = new Date().toISOString().slice(0, 10);
+    get_date.setAttribute("min", today);
 });
 
 
-edit_get_date.addEventListener('click',()=>{
+edit_get_date.addEventListener('click', () => {
     console.log("hello");
-    let today=new Date().toISOString().slice(0, 10);
-    edit_get_date.setAttribute("min",today);
+    let today = new Date().toISOString().slice(0, 10);
+    edit_get_date.setAttribute("min", today);
 });
 
 const multi_li_del = [];
 
 
-refresh.addEventListener('click',refreshItem);
+refresh.addEventListener('click', refreshItem);
 
-function refreshItem(){
+function refreshItem() {
     location.reload();
 }
 
@@ -80,21 +83,21 @@ function load() {
             if (key == "email" && all_user[i].email == user) {
                 update_user = all_user[i];
                 if (update_user.hasOwnProperty("todo")) {
-                    let key_id=1;
-                    for(let j=0;j<all_user[i].todo.length;j++){
-                        
+                    let key_id = 1;
+                    for (let j = 0; j < all_user[i].todo.length; j++) {
+
                         for (const [key, value] of Object.entries(all_user[i].todo[j])) {
-                            if(key=="id"){
-                            console.log(all_user[i].todo[j]);
-                            all_user[i].todo[j].id=key_id;
-                            key_id=key_id+1;
+                            if (key == "id") {
+                                console.log(all_user[i].todo[j]);
+                                all_user[i].todo[j].id = key_id;
+                                key_id = key_id + 1;
 
                             }
 
                         }
 
-                     console.log(all_user[i].todo);   
-                        
+                        console.log(all_user[i].todo);
+
 
                     }
 
@@ -119,8 +122,12 @@ function load() {
             newElm.className = "a";
             let content = `
     
+    <div class="todo-style">
     <div>
-    <label class="id">${todo[i].id}</label><br>
+    <label class="id">${todo[i].id}</label><br><br>
+    <img src="${todo[i].image}" alt="${todo[i].name}" style="width: 50px; height: 50px;">
+    </div>
+    <div>
     <label>Name:</label>
     <label class="name">${todo[i].name}</label><br>
     <label>Date:</label>
@@ -130,6 +137,9 @@ function load() {
     <label>Status:</label>
     <label>${todo[i].status}</label><br>
     </div><br>
+    </div>
+
+    
     
    
     <img src="images/edit.png" alt="" srcset="" id="edit" name="edit">
@@ -137,6 +147,7 @@ function load() {
     <input type="checkbox" id="multi-delete" name="check">
 
     `;
+            console.log(content);
             newElm.innerHTML = content;
             ul.appendChild(newElm)
         }
@@ -154,17 +165,18 @@ function load() {
                         for (const [key, value] of Object.entries(all_user[i].todo[j])) {
                             let today = new Date().toISOString().slice(0, 10);
                             console.log(today);
-                            
-                            if(key=="date" && all_user[i].todo[j].date==today && all_user[i].todo[j].status!="done"){
+
+                            if (key == "date" && all_user[i].todo[j].date == today && all_user[i].todo[j].status != "done") {
                                 console.log("inside 2");
-                               
-                                    console.log("inside 3");
-                                    
-                                    let newElm1 = document.createElement('li');
-                                    
-                                    let content1 = `
+
+                                console.log("inside 3");
+
+                                let newElm1 = document.createElement('li');
+
+                                let content1 = `
     
                                                     <div>
+                                                    <img src="${all_user[i].todo[j].image}" alt="${all_user[i].todo[j].name}" style="width: 50px; height: 50px;"><br>
                                                     <label>Name:</label>
                                                     <label class="name">${all_user[i].todo[j].name}</label><br>
                                                     <label>Date:</label>
@@ -177,12 +189,12 @@ function load() {
 
                                                     `;
 
-                                    newElm1.innerHTML=content1;
-                                    newElm1.classList.add("li1");
-                                    ul1.appendChild(newElm1);
-                                    
+                                newElm1.innerHTML = content1;
+                                newElm1.classList.add("li2");
+                                ul1.appendChild(newElm1);
 
-                                
+
+
                             }
 
 
@@ -195,7 +207,7 @@ function load() {
                 }
 
             }
-            
+
         }
     }
 
@@ -218,13 +230,15 @@ function alertRem() {
             getProfileName.innerHTML = all_user[i].first_name;
             getProfileEmail.innerHTML = all_user[i].email;
             getImage.src = all_user[i].image;
+            console.log(all_user[i].first_name);
+            console.log(all_user[i].email);
             if (all_user[i].email == user && all_user[i].hasOwnProperty('todo')) {
                 for (let j = 0; j < all_user[i].todo.length; j++) {
                     for (const [key, value] of Object.entries(all_user[i].todo[j])) {
                         let today = new Date().toISOString().slice(0, 10);
                         if ((all_user[i].todo[j].reminder == "yes") && (all_user[i].todo[j].date == today)) {
                             let r = `REMINDER ALERT \n Name:${all_user[i].todo[j].name}\n Date:${all_user[i].todo[j].date}`;
-                            alert(r);
+                            // alert(r);
                             break;
                         }
                     }
@@ -243,7 +257,7 @@ function alertRem() {
 
 
 load();
-// alertRem();
+alertRem();
 
 
 
@@ -264,6 +278,7 @@ del_chk.addEventListener('click', DeleteMultipleCheck)
 
 
 searchval.addEventListener('keyup', function (e) {
+
     const filterVal = e.target.value.toLowerCase();
     const ul = document.querySelector('ul');
     const li = ul.querySelectorAll('li');
@@ -276,18 +291,141 @@ searchval.addEventListener('keyup', function (e) {
     }
 });
 
-
+let date_list = [];
 searchDate.addEventListener('change', function (e) {
-    const filterVal = e.target.value;
-    const ul = document.querySelector('ul');
-    const li = ul.querySelectorAll('li');
-    for (let i = 0; i < li.length; i++) {
-        if (li[i].textContent.indexOf(filterVal) != -1) {
-            li[i].style.display = 'block';
-        } else {
-            li[i].style.display = 'none';
+    let d1, d2;
+
+    date_search.classList.remove("searchdate");
+
+    d1 = new Date(searchDate.value);
+    d1.setDate(d1.getDate() + 1);
+
+    searchDate1.addEventListener('change', function () {
+        d2 = new Date(searchDate1.value);
+        d2.setDate(d2.getDate() + 1);
+
+        let new_ul = document.querySelector('.add-li');
+        ul.innerHTML = "";
+
+        let user = sessionStorage.getItem(JSON.stringify("Users"));
+        user = JSON.parse(user);
+        let all_user = localStorage.getItem("Users");
+        all_user = JSON.parse(all_user);
+
+        date_list = [];
+
+
+
+        for (let i = 0; i < all_user.length; i++) {
+            for (const [key, value] of Object.entries(all_user[i])) {
+                if (all_user[i].email == user) {
+                    for (let j = 0; j < all_user[i].todo.length; j++) {
+                        for (const [key, value] of Object.entries(all_user[i].todo[j])) {
+                            if (key == "date") {
+                                let check_date = new Date(all_user[i].todo[j].date);
+                                check_date.setDate(check_date.getDate() + 1);
+
+                                if (check_date >= d1 && check_date <= d2) {
+                                    console.log("********");
+                                    if (date_list.includes(all_user[i].todo[j].id)) {
+
+                                    }
+                                    else {
+                                        date_list.push(all_user[i].todo[j].id);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-    }
+        console.log(date_list);
+
+
+        let id_list = [];
+        let content2;
+        for (let i = 0; i < all_user.length; i++) {
+            for (const [key, value] of Object.entries(all_user[i])) {
+                if (all_user[i].email == user) {
+                    for (let j = 0; j < all_user[i].todo.length; j++) {
+                        for (const [key, value] of Object.entries(all_user[i].todo[j])) {
+                            if (date_list.includes(all_user[i].todo[j].id)) {
+                                if (id_list.includes(all_user[i].todo[j].id)) {
+
+
+                                }
+                                else {
+                                    let newElm2 = document.createElement('li');
+                                    console.log("Hello")
+                                    id_list.push(all_user[i].todo[j].id)
+                                    console.log(id_list);
+                                    content2 = `
+    
+                                    <div class="todo-style">
+                                    <div>
+                                    <label class="id">${all_user[i].todo[j].id}</label><br><br>
+                                    <img src="${all_user[i].todo[j].image}" alt="${all_user[i].todo[j].name}" style="width: 50px; height: 50px;">
+                                    </div>
+                                    <div>
+                                    <label>Name:</label>
+                                    <label class="name">${all_user[i].todo[j].name}</label><br>
+                                    <label>Date:</label>
+                                    <label>${all_user[i].todo[j].date}</label><br>
+                                    <label>Category:</label>
+                                    <label>${all_user[i].todo[j].category}</label><br>
+                                    <label>Status:</label>
+                                    <label>${all_user[i].todo[j].status}</label><br>
+                                    </div><br>
+                                    </div>
+
+                                    `;
+
+                                    console.log(content2);
+                                    newElm2.innerHTML = content2;
+                                    // newElm2.classList.add("li1");
+                                    ul.appendChild(newElm2);
+
+
+
+                                }
+
+
+                            }
+
+                        }
+
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
+
+
+
+
+    });
+
+
+
+
+    // ul.innerHTML = "";
+
+    // const filterVal = e.target.value;
+    // const ul = document.querySelector('ul');
+    // const li = ul.querySelectorAll('li');
+    // for (let i = 0; i < li.length; i++) {
+    //     if (li[i].textContent.indexOf(filterVal) != -1) {
+    //         li[i].style.display = 'block';
+    //     } else {
+    //         li[i].style.display = 'none';
+    //     }
+    // }
 
 
 });
@@ -319,9 +457,35 @@ searchStatus.addEventListener('click', function (e) {
     }
 
 });
+let newFile;
+function changeImg() {
+    let changePicInput = document.getElementById("img");
+    let img_RegEx=/.(gif|jpe|jpeg|JPG|JPEG|PNG|png|webp|bmp)$/i;
+    let img_test=img_RegEx.test(changePicInput.value);
 
+    if(img_test==true){
+        submit.disabled=false;
+        invalid_img.innerHTML=""
+        let reader = new FileReader();
+    reader.readAsDataURL(changePicInput.files[0]);
+    reader.onloadend = function (event) {
+        let Image = document.getElementById("img");
+        Image.src = event.target.result;
+        // console.log(Image);
+        newFile = Image.src;
+        // console.log(newFile);
+        
+    }
 
+    }
+    else{
+        submit.disabled=true;
+        invalid_img.innerHTML="Invalid Image";
+        invalid_img.classList.add("add-color");
+    }
 
+    
+}
 
 function handelEvent(e) {
     if (e.target.name == 'delete') {
@@ -346,75 +510,88 @@ function handelMultipleDelete(e) {
 }
 
 function DeleteMultipleCheck() {
+    if (confirm("Press Ok button to delete multiple Todo!")) {
+        console.log(multi_li_del);
+        if (multi_li_del.length == 0) {
+            alert("Checkbox Not Selected");
+        }
 
-    console.log(multi_li_del);
-    if (multi_li_del.length == 0) {
-        alert("Checkbox Not Selected");
+        else {
+            let user = sessionStorage.getItem(JSON.stringify("Users"));
+            user = JSON.parse(user);
+            let all_user = localStorage.getItem("Users");
+            all_user = JSON.parse(all_user);
+            let update_user;
+            let check = 0;
+            for (let i = 0; i < all_user.length; i++) {
+                for (const [key, value] of Object.entries(all_user[i])) {
+                    if (all_user[i].email == user) {
+                        for (let j = 0; j < all_user[i].todo.length; j++) {
+                            for (const [key, value] of Object.entries(all_user[i].todo[j])) {
+                                console.log(multi_li_del.includes(all_user[i].todo[j].id));
+                                if (multi_li_del.includes(all_user[i].todo[j].id)) {
+                                    all_user[i].todo.splice(j, 1);
+                                    localStorage.setItem("Users", JSON.stringify(all_user));
+                                    location.reload();
+                                }
+                            }
+
+                        }
+
+                        break;
+                    }
+                    else {
+
+                    }
+                }
+            }
+        }
+
+    } else {
+        location.reload();
+
     }
 
-    else {
-        let user = sessionStorage.getItem(JSON.stringify("Users"));
-        user = JSON.parse(user);
+
+}
+
+function handelDelete(e) {
+
+    if (confirm("Press Ok button to Delete ToDo Item")) {
+        let item = e.target.parentNode;
+        let update = item.querySelector('.id').innerHTML;
+        item.remove();
         let all_user = localStorage.getItem("Users");
         all_user = JSON.parse(all_user);
-        let update_user;
-        let check = 0;
+        let user = sessionStorage.getItem(JSON.stringify("Users"));
+        user = JSON.parse(user);
         for (let i = 0; i < all_user.length; i++) {
             for (const [key, value] of Object.entries(all_user[i])) {
                 if (all_user[i].email == user) {
                     for (let j = 0; j < all_user[i].todo.length; j++) {
                         for (const [key, value] of Object.entries(all_user[i].todo[j])) {
-                            console.log(multi_li_del.includes(all_user[i].todo[j].id));
-                            if (multi_li_del.includes(all_user[i].todo[j].id)) {
+                            if (all_user[i].todo[j].id == update) {
                                 all_user[i].todo.splice(j, 1);
                                 localStorage.setItem("Users", JSON.stringify(all_user));
-                                location.reload();
+                                break;
                             }
+
                         }
 
                     }
 
-                    break;
                 }
                 else {
 
                 }
             }
         }
-    }
-}
 
-function handelDelete(e) {
-    let item = e.target.parentNode;
-    let update = item.querySelector('.id').innerHTML;
-    item.remove();
-    let all_user = localStorage.getItem("Users");
-    all_user = JSON.parse(all_user);
-    let user = sessionStorage.getItem(JSON.stringify("Users"));
-    user = JSON.parse(user);
-    for (let i = 0; i < all_user.length; i++) {
-        for (const [key, value] of Object.entries(all_user[i])) {
-            if (all_user[i].email == user) {
-                for (let j = 0; j < all_user[i].todo.length; j++) {
-                    for (const [key, value] of Object.entries(all_user[i].todo[j])) {
-                        if (all_user[i].todo[j].id == update) {
-                            all_user[i].todo.splice(j, 1);
-                            localStorage.setItem("Users", JSON.stringify(all_user));
-                            break;
-                        }
-
-                    }
-
-                }
-
-            }
-            else {
-
-            }
-        }
+        location.reload();
+    } else {
+        location.reload();
     }
 
-    location.reload();
 }
 
 function getEditName() {
@@ -588,7 +765,7 @@ function handelEdit(e) {
                 }
             }
         }
-        
+
     });
 }
 
@@ -603,8 +780,8 @@ function handelEditcancel() {
 }
 
 
-let reminder_alert=document.querySelector(".reminder-alert");
-let reminder_text=document.querySelector(".reminder-text");
+let reminder_alert = document.querySelector(".reminder-alert");
+let reminder_text = document.querySelector(".reminder-text");
 function addTask() {
 
     pop_up.classList.remove('edit-pop-up');
@@ -708,20 +885,20 @@ function getReminderDate(id) {
         for (let i = 0; i < all_user.length; i++) {
             for (const [key, value] of Object.entries(all_user[i])) {
                 if (key == "email" && all_user[i].email == user) {
-                    for(let j=0;j<all_user[i].todo.length;j++){
+                    for (let j = 0; j < all_user[i].todo.length; j++) {
                         for (const [key, value] of Object.entries(all_user[i].todo[j])) {
-                            if(key=="id" && all_user[i].todo[j].id==id){
+                            if (key == "id" && all_user[i].todo[j].id == id) {
                                 console.log("inside last");
-                                all_user[i].todo[j].date=reminder_date;
+                                all_user[i].todo[j].date = reminder_date;
                             }
 
                         }
-                       
+
 
                     }
 
                 }
-                
+
             }
         }
 
@@ -731,9 +908,9 @@ function getReminderDate(id) {
         show_date.classList.remove("enable-date");
         main_body.classList.remove("main");
         location.reload();
-    
+
     });
-    
+
 
 
 
@@ -753,11 +930,10 @@ function submitItem() {
     let item_status = getStatus();
     let item_reminder = getReminder();
     let item_public = getPublic();
-    // let item_file = getFile();
-    let item_id=1;
+    let item_file = newFile;
+    let item_id = 1;
 
-
-    
+   
 
     let user = sessionStorage.getItem(JSON.stringify("Users"));
     user = JSON.parse(user);
@@ -769,16 +945,16 @@ function submitItem() {
     for (let i = 0; i < all_user.length; i++) {
         for (const [key, value] of Object.entries(all_user[i])) {
             if (key == "email" && all_user[i].email == user) {
-                if(all_user[i].hasOwnProperty("todo")){
+                if (all_user[i].hasOwnProperty("todo")) {
                     for (const [key, value] of Object.entries(all_user[i].todo)) {
 
 
-                        item_id=(all_user[i].todo).length+1;
-                        
-    
-    
+                        item_id = (all_user[i].todo).length + 1;
+
+
+
                     }
-                    
+
                 }
 
 
@@ -790,12 +966,13 @@ function submitItem() {
     }
 
     const item = {
-        id:item_id,
+        id: item_id,
         name: item_name,
         date: item_date,
         category: item_category,
         status: item_status,
         reminder: item_reminder,
+        image:item_file,
         public: item_public
     };
 
@@ -869,8 +1046,13 @@ function submitItem() {
 
     let newElm = document.createElement('li');
     let content = `
+    <div class="todo-style">
     <div>
-    <label>${item_id}</label><br>
+    <label>${item_id}</label><br><br>
+    <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px;">
+    </div>
+    <div>
+   
     <label>Name:</label>
     <label class="name">${item.name}</label><br>
     <label>Date:</label>
@@ -879,6 +1061,7 @@ function submitItem() {
     <label>${item.category}</label><br>
     <label>Status:</label>
     <label>${item.status}</label><br>
+    </div>
     </div> <br>
 
     <img src="images/edit.png" alt="" srcset="" id="edit" name="edit">
@@ -887,7 +1070,7 @@ function submitItem() {
 
     `;
     newElm.innerHTML = content;
-    ul.appendChild(newElm)
+    ul.appendChild(newElm);
     // pop_up.classList.remove("display-pop-up");
     // main_body.classList.remove("main");
 }
