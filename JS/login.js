@@ -2,8 +2,8 @@ const regex_email = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/
 const email = document.getElementById('email');
 const pwd = document.getElementById('pwd');
 const submit = document.getElementById('submit');
-email.addEventListener('blur', validateEmail);
-pwd.addEventListener('blur', checkpwd);
+email.addEventListener('keyup', validateEmail);
+pwd.addEventListener('keyup', checkpwd);
 submit.addEventListener('click', login);
 
 
