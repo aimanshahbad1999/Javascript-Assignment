@@ -51,7 +51,8 @@
             <br><br>
 
             <label for="sname">Name</label>
-            <input onkeyup="filter()" type="text" id="search" name="search" value=""><br><br>
+            <!-- <input onkeyup="filter()" type="text" id="search" name="search" value=""><br><br> -->
+            <input  type="text" id="search" name="search" value=""><br><br>
 
             <label for="scategory">Category:</label>
             <select name="category" id="scategory">
@@ -80,6 +81,13 @@
                 <br><br>
                 <input type="button" value="Refresh" id="refresh">
 
+                <div class="add">
+                    Todo List Empty
+                </div>
+
+                <div class="empty">
+                    
+                </div>
 
                 <div class="todo-list">
                     <ul id="menu">
@@ -99,7 +107,7 @@
         <center>
             <h2>ADD ITEM</h2>
         </center>
-        <form action="#">
+    
         <label for="name">Name</label>
         <input type="text" id="name" name="name" value="" required><br>
 
@@ -166,7 +174,6 @@
         <label class="invalid-image" style="color: red;"></label>
     </center>
 
-    </form>
 
 
 
@@ -237,14 +244,19 @@
 
         <label> IsPublic:</label>
         <span class="epublic">
-            <input type="radio" id="epublic" name="epublic" value="public">
-            <label for="epublic">Public</label><br><br>
+         
+
+            <input type="radio" id="epublic-yes" name="epublic" value="yes">
+            <label for="epublic">Yes</label>
+            <input type="radio" id="epublic-no" name="epublic" value="no" >
+            <label for="epublic-no">No</label><br><br>
         </span>
 
         <br><br>
 
         <input type="button" value="Cancel" id="edit-cancel">
         <input type="submit" value="Update" id="edit-submit">
+        <div class="edit-error"></div>
 
 
 
@@ -254,7 +266,12 @@
         Reminder Alerts
     </div>
 
+   
+
     <div class="reminder-alert">
+        <!-- <div class="reminer-empty">
+            No Reminder Alerts For Today
+        </div> -->
         <ul class="add-reminder">
            
         </ul>

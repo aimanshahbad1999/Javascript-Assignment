@@ -213,3 +213,24 @@ li{
 .add-color{
     color:red;
 }
+
+.add{
+    margin-left: 150px;
+    font-size:x-large ;
+    color: red;
+}
+
+.reminer-empty{
+
+   
+    font-size:x-large ;
+    color: red;
+
+}
+
+
+.empty{
+    margin-left: 150px;
+    font-size:x-large ;
+    color: red;
+}

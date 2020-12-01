@@ -30,8 +30,8 @@ let error_submit = document.querySelector('.error-submit');
 
 
 
-fname.addEventListener('blur', validateFirstName);
-lname.addEventListener('blur', validateLastName);
+fname.addEventListener('keyup', validateFirstName);
+lname.addEventListener('keyup', validateLastName);
 submitbtn.addEventListener('click', submitDetails);
 pwd.addEventListener('blur', checkPassword);
 address.addEventListener('blur', validateAddress);
@@ -146,6 +146,7 @@ all_user = JSON.parse(all_user);
 
 
 function validateFirstName() {
+    submitbtn.disabled = false;
     let error_fname = document.querySelector(".error-fname");
     if (regex_fname.test(fname.value)) {
         error_fname.innerHTML = " ";
@@ -160,11 +161,12 @@ function validateFirstName() {
 
     }
     else {
-        error_fname.innerHTML = "Enter Alphabet only";
+        // error_fname.innerHTML = "Enter Alphabet only";
     }
 }
 
 function validateLastName() {
+    submitbtn.disabled=false;
     let error_lname = document.querySelector(".error-lname");
     if (regex_lname.test(lname.value)) {
 
@@ -181,7 +183,7 @@ function validateLastName() {
     }
     else {
 
-        error_lname.innerHTML = "Enter Alphabet only";
+        // error_lname.innerHTML = "Enter Alphabet only";
     }
 }
 
@@ -312,6 +314,27 @@ function ValidateUpdateProfile() {
 
 function submitDetails() {
 
+    if(fname.value==""){
+        error_submit.innerHTML="Enter First Name";
+        submitbtn.disabled = true;
+       
+    }
+    else if(lname.value==""){
+
+        error_submit.innerHTML="Enter Last Name";
+        submitbtn.disabled = true;
+
+    }else if(pwd.value==""){
+        error_submit.innerHTML="Enter Password";
+        submitbtn.disabled = true;
+
+    }else if(cpwd.value==""){
+
+        error_submit.innerHTML="Enter confirm  Password";
+        submitbtn.disabled = true;
+
+    }else{
+
     radioValue();
     if(image_selected==1 && image_count==0){
         error_submit.innerHTML = "Invalid File";
@@ -329,6 +352,6 @@ function submitDetails() {
         error_submit.innerHTML = "check confirm password or some filed missing";
     }
 
-
+    }
 }
 

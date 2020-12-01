@@ -72,6 +72,7 @@ function refreshItem() {
 }
 
 function load() {
+    let add=0;
     let user = sessionStorage.getItem(JSON.stringify("Users"));
     user = JSON.parse(user);
     let all_user = localStorage.getItem("Users");
@@ -150,6 +151,7 @@ function load() {
             console.log(content);
             newElm.innerHTML = content;
             ul.appendChild(newElm)
+            add=1;
         }
     } else {
 
@@ -211,7 +213,15 @@ function load() {
         }
     }
 
+    let empty=document.querySelector('.add');
+        if(add==1){
+           
+            empty.classList.add('dis');
 
+        }else{
+            empty.classList.remove('dis');
+
+        }
 }
 
 function callAlert(r) {
@@ -275,6 +285,7 @@ submit.addEventListener('click', submitItem);
 cancel.addEventListener('click', cancelItem);
 ul.addEventListener('click', handelEvent);
 del_chk.addEventListener('click', DeleteMultipleCheck)
+
 
 
 searchval.addEventListener('keyup', function (e) {
@@ -388,6 +399,7 @@ searchDate.addEventListener('change', function (e) {
 
 
 
+
                                 }
 
 
@@ -410,6 +422,7 @@ searchDate.addEventListener('change', function (e) {
 
 
     });
+
 
 
 
@@ -602,9 +615,15 @@ function handelDelete(e) {
     }
 
 }
-
+let ename=0;
 function getEditName() {
     const name = document.getElementById('ename').value;
+    if(ename==''){
+        ename=0;
+    }
+    else{
+        ename=1;
+    }
     return name;
 }
 
@@ -695,6 +714,11 @@ function handelEdit(e) {
     all_user = JSON.parse(all_user);
     const name = document.getElementById('ename');
     const date=document.getElementById('edate');
+    const category=document.getElementsByName('ecategory');
+    const status=document.getElementsByName('estatus');
+    const reminder=document.getElementsByName('eremind');
+    const public=document.getElementsByName('epublic');
+
 
     for (let i = 0; i < all_user.length; i++) {
         for (const [key, value] of Object.entries(all_user[i])) {
@@ -704,6 +728,43 @@ function handelEdit(e) {
                         if(key=="id" && all_user[i].todo[j].id==add_val){
                             name.value=all_user[i].todo[j].name;
                             date.value=all_user[i].todo[j].date;
+
+                            let str1=all_user[i].todo[j].category;
+                            let str2="";
+                            for(let i=0;i<category.length;i++){
+                                str2=category[i].value;
+                                if(str1==str2){
+                                    category[i].checked=true;
+                                }   
+                            }
+
+                            str1=all_user[i].todo[j].status;
+                            str2="";
+                            for(let i=0;i<status.length;i++){
+                                str2=status[i].value;
+                                if(str1==str2){
+                                    status[i].checked=true;
+                                }   
+                            }
+
+
+                            str1=all_user[i].todo[j].reminder;
+                            str2="";
+                            for(let i=0;i<reminder.length;i++){
+                                str2=reminder[i].value;
+                                if(str1==str2){
+                                    reminder[i].checked=true;
+                                }   
+                            }
+
+                            str1=all_user[i].todo[j].public;
+                            str2="";
+                            for(let i=0;i<public.length;i++){
+                                str2=public[i].value;
+                                if(str1==str2){
+                                    public[i].checked=true;
+                                }   
+                            }
                             
                             break;
                             
@@ -721,6 +782,8 @@ function handelEdit(e) {
 
 
     edit_submit.addEventListener('click', () => {
+
+        
     
         reminder_text.classList.remove("dis");
         reminder_alert.classList.remove("dis");
@@ -813,8 +876,9 @@ function handelEdit(e) {
                 }
             }
         }
-
+        location.reload();
     });
+    
 }
 
 
@@ -824,6 +888,7 @@ function handelEditcancel() {
     edit_pop_up.classList.add('dis');
     reminder_alert.classList.remove("dis");
     reminder_text.classList.remove("dis");
+    location.reload();
 
 }
 
@@ -1060,6 +1125,7 @@ function submitItem() {
         }
 
         else {
+            location.reload();
             pop_up.classList.remove("display-pop-up");
             main_body.classList.remove("main");
 
