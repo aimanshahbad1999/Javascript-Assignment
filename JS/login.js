@@ -69,7 +69,7 @@ function login() {
     } else {
 
         if (user == undefined) {
-            alert("User not exist ");
+            submit_error.innerHTML = "Username and Password not matched";
             submit.disabled = true;
         }
         else {
