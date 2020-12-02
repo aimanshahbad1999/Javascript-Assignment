@@ -67,36 +67,43 @@
                 <option value="active">Active</option>
                 <option value="pending">Pending</option>
             </select>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+            <input type="button" value="Refresh" id="refresh">
 
 
             
         </div>
         <hr>
-        <section>
+        <section >
             <div class="add-item">
                 <input type="button" value="Add ToDo" id="add-todo">
 
                 <input type="button" value="Delete" id="del-check">
                 <br><br>
-                <input type="button" value="Refresh" id="refresh">
+               
 
-                <div class="add">
-                    Todo List Empty
-                </div>
+               
 
-                <div class="empty">
+                <!-- <div class="empty">
                     
-                </div>
+                </div> -->
 
-                <div class="todo-list">
-                    <ul id="menu">
+                <div class="todo-list" >
+                    <div id="date-found">
+                        Result Not Found
+                    </div>
+                    <ul id="menu" >
+                        <div class="add" >
+                            Todo List Empty
+                        </div>
+
+                       
 
 
                     </ul>
-                    <ul class="add-li">
+                    <!-- <ul class="add-li" >
 
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </section>
@@ -105,14 +112,16 @@
     <div class="pop-up">
 
         <center>
-            <h2>ADD ITEM</h2>
+            <h2>ADD Todo</h2>
         </center>
     
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" value="" required><br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="" required><br><br>
 
-
-
+        <label for="end-date">End Date:</label>
+        <span class="end-calender">
+            <input type="date" id="end-date" value=""><br><br>
+        </span>
 
         <label>Task Category:</label>
         <span class="category">
@@ -198,17 +207,18 @@
     <div class="edit-pop-up">
 
         <center>
-            <h2>Update ITEM</h2>
+            <h2>Update Todo</h2>
         </center>
 
         <label for="ename">Name</label>
         <input type="text" id="ename" name="name" value=""><br>
 
 
-        <label for="edate">Date</label>
+        <label for="edate">End Date</label>
         <span class="ecalender">
             <input type="date" id="edate" value=""><br><br>
         </span>
+
 
 
         <label>Task Category:</label>
@@ -242,6 +252,11 @@
 
         </span>
 
+        <label for="rdate">Reminder Date</label>
+        <span class="rcalender">
+            <input type="date" id="rdate" value=""><br><br>
+        </span>
+
         <label> IsPublic:</label>
         <span class="epublic">
          
@@ -262,19 +277,26 @@
 
     </div>
 
-    <div class="reminder-text">
-        Reminder Alerts
-    </div>
-
+   
    
 
     <div class="reminder-alert">
         <!-- <div class="reminer-empty">
             No Reminder Alerts For Today
         </div> -->
-        <ul class="add-reminder">
+
+        <div class="reminder-text">
+            <span>
+            Reminder Alerts                                                                   
+        </span><br> <br>
+        <div class="reminder-not-found"> No Reminder For Today</div>
+            <ul class="add-reminder">
            
-        </ul>
+            </ul>
+        </div>
+    
+
+       
     </div>
 
 </body>

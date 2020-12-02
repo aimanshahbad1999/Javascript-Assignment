@@ -48,11 +48,12 @@ const edit_submit = document.getElementById('edit-submit');
 const edit_pop_up = document.querySelector('.edit-pop-up');
 let get_date = document.getElementById('date');
 let edit_get_date = document.getElementById('edate');
-
+let add_end_date = "";
 get_date.addEventListener('click', () => {
     console.log("hello");
     let today = new Date().toISOString().slice(0, 10);
     get_date.setAttribute("min", today);
+    get_date.setAttribute("max", add_end_date);
 });
 
 
@@ -70,9 +71,10 @@ refresh.addEventListener('click', refreshItem);
 function refreshItem() {
     location.reload();
 }
-
+let add_del_btn=0;
 function load() {
-    let add=0;
+    add_del_btn=0;
+    let add = 0;
     let user = sessionStorage.getItem(JSON.stringify("Users"));
     user = JSON.parse(user);
     let all_user = localStorage.getItem("Users");
@@ -131,8 +133,10 @@ function load() {
     <div>
     <label>Name:</label>
     <label class="name">${todo[i].name}</label><br>
-    <label>Date:</label>
-    <label>${todo[i].date}</label><br>
+    <label>End Date:</label>
+    <label>${todo[i].end_date}</label><br>
+    <label>Reminder Date:</label>
+    <label>${todo[i].reminder_date}</label><br>
     <label>Category:</label>
     <label>${todo[i].category}</label><br>
     <label>Status:</label>
@@ -151,12 +155,15 @@ function load() {
             console.log(content);
             newElm.innerHTML = content;
             ul.appendChild(newElm)
-            add=1;
+            add_del_btn=1;
+
+
+            add = 1;
         }
     } else {
 
     }
-
+    let reminder_found = 0;
     for (let i = 0; i < all_user.length; i++) {
         for (const [key, value] of Object.entries(all_user[i])) {
             if (key == "email" && all_user[i].email == user) {
@@ -168,7 +175,7 @@ function load() {
                             let today = new Date().toISOString().slice(0, 10);
                             console.log(today);
 
-                            if (key == "date" && all_user[i].todo[j].date == today && all_user[i].todo[j].status != "done") {
+                            if (key == "reminder_date" && all_user[i].todo[j].reminder_date == today && all_user[i].todo[j].status != "done" && all_user[i].todo[j].reminder != 'no') {
                                 console.log("inside 2");
 
                                 console.log("inside 3");
@@ -181,8 +188,10 @@ function load() {
                                                     <img src="${all_user[i].todo[j].image}" alt="${all_user[i].todo[j].name}" style="width: 50px; height: 50px;"><br>
                                                     <label>Name:</label>
                                                     <label class="name">${all_user[i].todo[j].name}</label><br>
-                                                    <label>Date:</label>
-                                                    <label>${all_user[i].todo[j].date}</label><br>
+                                                    <label>End Date:</label>
+                                                    <label>${all_user[i].todo[j].end_date}</label><br>
+                                                    <label>Reminder Date:</label>
+                                                    <label>${all_user[i].todo[j].reminder_date}</label><br>
                                                     <label>Category:</label>
                                                     <label>${all_user[i].todo[j].category}</label><br>
                                                     <label>Status:</label>
@@ -194,6 +203,7 @@ function load() {
                                 newElm1.innerHTML = content1;
                                 newElm1.classList.add("li2");
                                 ul1.appendChild(newElm1);
+                                reminder_found = 1;
 
 
 
@@ -213,15 +223,31 @@ function load() {
         }
     }
 
-    let empty=document.querySelector('.add');
-        if(add==1){
-           
-            empty.classList.add('dis');
+    if (reminder_found == 1) {
 
-        }else{
-            empty.classList.remove('dis');
+    } else {
+        let r_found = document.querySelector('.reminder-not-found');
+        r_found.style.display = "block";
+    }
 
-        }
+    let empty = document.querySelector('.add');
+    if (add == 1) {
+
+        empty.classList.add('dis');
+
+    } else {
+        empty.classList.remove('dis');
+
+    }
+
+    if(add_del_btn==1){
+        let delete_btn=document.getElementById('del-check');
+        delete_btn.style.display="block";
+        
+
+    }else{
+       
+    }
 }
 
 function callAlert(r) {
@@ -289,6 +315,12 @@ del_chk.addEventListener('click', DeleteMultipleCheck)
 
 
 searchval.addEventListener('keyup', function (e) {
+    let name_found = 0;
+    let found = document.getElementById('date-found');
+   
+    found.style.display="none";
+
+
 
     const filterVal = e.target.value.toLowerCase();
     const ul = document.querySelector('ul');
@@ -296,24 +328,55 @@ searchval.addEventListener('keyup', function (e) {
     for (let i = 0; i < li.length; i++) {
         if (li[i].textContent.toLowerCase().indexOf(filterVal) != -1) {
             li[i].style.display = 'block';
+            name_found = 1;
         } else {
             li[i].style.display = 'none';
+            // name_found = 0;
         }
     }
+    let demo = 0;
+
+    if (name_found == 1) {
+        demo = 1;
+    }
+
+    if (searchval == '') {
+        found.style.display = "none";
+
+    } else 
+    if (name_found ==1) {
+        found.style.display = "none";
+
+
+    } else {
+        found.style.display = "block";
+
+    }
+
+
 });
 
 let date_list = [];
+
 searchDate.addEventListener('change', function (e) {
+    let date_found = document.getElementById('date-found');
+    date_found.style.display = "none";
     let d1, d2;
 
     date_search.classList.remove("searchdate");
 
     d1 = new Date(searchDate.value);
     d1.setDate(d1.getDate() + 1);
+    let sdate = document.getElementById('sdate').value;
+    searchDate1.setAttribute('min', sdate);
 
     searchDate1.addEventListener('change', function () {
+        let date_found1 = document.getElementById('date-found');
+        date_found1.style.display = "none";
         d2 = new Date(searchDate1.value);
         d2.setDate(d2.getDate() + 1);
+
+
 
         let new_ul = document.querySelector('.add-li');
         ul.innerHTML = "";
@@ -332,8 +395,8 @@ searchDate.addEventListener('change', function (e) {
                 if (all_user[i].email == user) {
                     for (let j = 0; j < all_user[i].todo.length; j++) {
                         for (const [key, value] of Object.entries(all_user[i].todo[j])) {
-                            if (key == "date") {
-                                let check_date = new Date(all_user[i].todo[j].date);
+                            if (key == "end_date") {
+                                let check_date = new Date(all_user[i].todo[j].end_date);
                                 check_date.setDate(check_date.getDate() + 1);
 
                                 if (check_date >= d1 && check_date <= d2) {
@@ -356,6 +419,7 @@ searchDate.addEventListener('change', function (e) {
 
         let id_list = [];
         let content2;
+        let date_found = 0;
         for (let i = 0; i < all_user.length; i++) {
             for (const [key, value] of Object.entries(all_user[i])) {
                 if (all_user[i].email == user) {
@@ -381,8 +445,10 @@ searchDate.addEventListener('change', function (e) {
                                     <div>
                                     <label>Name:</label>
                                     <label class="name">${all_user[i].todo[j].name}</label><br>
-                                    <label>Date:</label>
-                                    <label>${all_user[i].todo[j].date}</label><br>
+                                    <label>End Date:</label>
+                                    <label>${all_user[i].todo[j].end_date}</label><br>
+                                    <label>Reminder Date:</label>
+                                    <label>${all_user[i].todo[j].reminder_date}</label><br>
                                     <label>Category:</label>
                                     <label>${all_user[i].todo[j].category}</label><br>
                                     <label>Status:</label>
@@ -396,6 +462,8 @@ searchDate.addEventListener('change', function (e) {
                                     newElm2.innerHTML = content2;
                                     // newElm2.classList.add("li1");
                                     ul.appendChild(newElm2);
+                                    date_found = 1;
+
 
 
 
@@ -413,6 +481,18 @@ searchDate.addEventListener('change', function (e) {
                 }
 
             }
+
+        }
+
+        if (date_found == 1) {
+
+        }
+        else {
+
+            let date_found = document.getElementById('date-found');
+            console.log(date_found.innerHTML);
+            date_found.style.display = "block";
+
 
         }
 
@@ -445,28 +525,55 @@ searchDate.addEventListener('change', function (e) {
 
 
 searchCat.addEventListener('click', function (e) {
+    let cat_found = 0;
+    let found = document.getElementById('date-found');
+    found.style.display = "none";
+
     const filterVal = e.target.value;
     const ul = document.querySelector('ul');
     const li = ul.querySelectorAll('li');
     for (let i = 0; i < li.length; i++) {
         if (li[i].textContent.indexOf(filterVal) != -1) {
             li[i].style.display = 'block';
+            cat_found = 1;
         } else {
             li[i].style.display = 'none';
+            // cat_found = 0;
         }
     }
+
+    if (cat_found == 1) {
+        found.style.display = "none";
+
+    } else {
+        found.style.display = "block";
+    }
+
 });
 
+
 searchStatus.addEventListener('click', function (e) {
+    let status_found = 0;
+    let found = document.getElementById('date-found');
+    found.style.display = "none";
     const filterVal = e.target.value;
     const ul = document.querySelector('ul');
     const li = ul.querySelectorAll('li');
     for (let i = 0; i < li.length; i++) {
         if (li[i].textContent.indexOf(filterVal) != -1) {
             li[i].style.display = 'block';
+            status_found = 1;
         } else {
             li[i].style.display = 'none';
+            // status_found = 0;
         }
+    }
+
+    if (status_found == 1) {
+        found.style.display = "none";
+
+    } else {
+        found.style.display = "block";
     }
 
 });
@@ -510,6 +617,7 @@ function changeImg() {
 }
 
 function handelEvent(e) {
+
     if (e.target.name == 'delete') {
         handelDelete(e);
     }
@@ -520,14 +628,19 @@ function handelEvent(e) {
     }
 
     if (e.target.name = 'check') {
+
         handelMultipleDelete(e);
+
     }
 
 }
+// let handelDel=document.getElementById('del-check');
 
 function handelMultipleDelete(e) {
+    // handelDel.style.display='block';
     let li_id = e.target.parentNode.querySelector('.id').innerHTML;
     multi_li_del.push(parseInt(li_id));
+
 
 }
 
@@ -570,7 +683,7 @@ function DeleteMultipleCheck() {
         }
 
     } else {
-       location.reload();
+        location.reload();
 
     }
 
@@ -609,20 +722,46 @@ function handelDelete(e) {
             }
         }
 
-       location.reload();
+        location.reload();
     } else {
         location.reload();
     }
 
 }
-let ename=0;
+// let ename=0;
+
+
+let ename = document.getElementById('ename');
+ename.addEventListener('keyup', () => {
+    edit_submit.disabled = false;
+});
+
+
+let edate = document.getElementById('edate');
+edate.addEventListener('change', () => {
+    edit_submit.disabled = false;
+});
+
+let rdate = document.getElementById('rdate');
+rdate.addEventListener('change', () => {
+    edit_submit.disabled = false;
+});
+
+
+
+
+let c_edit_name = 0;
+let c_edit_edate = 0;
+let c_edit_rdate = 0;
 function getEditName() {
     const name = document.getElementById('ename').value;
-    if(ename==''){
-        ename=0;
+    if (name == '') {
+        // ename=0;
+        c_edit_name = 0;
     }
-    else{
-        ename=1;
+    else {
+        c_edit_name = 1;
+        // ename=1;
     }
     return name;
 }
@@ -630,7 +769,12 @@ function getEditName() {
 function getEditDate() {
 
     const date = document.getElementById('edate').value;
-    return date
+    if (date == '') {
+        c_edit_edate = 0;
+    } else {
+        c_edit_edate = 1;
+    }
+    return date;
 
 }
 
@@ -689,6 +833,17 @@ function getEditFile() {
 }
 
 
+function getEditReminderDate() {
+    const rdate = document.getElementById('rdate').value;
+    if (rdate == '') {
+        c_edit_rdate = 0;
+    } else {
+        c_edit_rdate = 1;
+    }
+    return rdate;
+}
+
+
 
 function handelEdit(e) {
 
@@ -704,7 +859,7 @@ function handelEdit(e) {
 
 
     let item = e;
-    let add_val=e;
+    let add_val = e;
     add_val = add_val.querySelector('.id').innerHTML;
     console.log(add_val);
     let user = sessionStorage.getItem(JSON.stringify("Users"));
@@ -713,11 +868,18 @@ function handelEdit(e) {
     let all_user = localStorage.getItem("Users");
     all_user = JSON.parse(all_user);
     const name = document.getElementById('ename');
-    const date=document.getElementById('edate');
-    const category=document.getElementsByName('ecategory');
-    const status=document.getElementsByName('estatus');
-    const reminder=document.getElementsByName('eremind');
-    const public=document.getElementsByName('epublic');
+    const date = document.getElementById('edate');
+    const category = document.getElementsByName('ecategory');
+    const status = document.getElementsByName('estatus');
+    const reminder = document.getElementsByName('eremind');
+    const public = document.getElementsByName('epublic');
+    const r_date = document.getElementById('rdate');
+
+    r_date.addEventListener('click', () => {
+        let today = new Date().toISOString().slice(0, 10);
+        r_date.setAttribute("min", today);
+        r_date.setAttribute("max", date.value);
+    });
 
 
     for (let i = 0; i < all_user.length; i++) {
@@ -725,49 +887,50 @@ function handelEdit(e) {
             if (all_user[i].email == user) {
                 for (let j = 0; j < all_user[i].todo.length; j++) {
                     for (const [key, value] of Object.entries(all_user[i].todo[j])) {
-                        if(key=="id" && all_user[i].todo[j].id==add_val){
-                            name.value=all_user[i].todo[j].name;
-                            date.value=all_user[i].todo[j].date;
+                        if (key == "id" && all_user[i].todo[j].id == add_val) {
+                            name.value = all_user[i].todo[j].name;
+                            date.value = all_user[i].todo[j].end_date;
+                            r_date.value = all_user[i].todo[j].reminder_date;
 
-                            let str1=all_user[i].todo[j].category;
-                            let str2="";
-                            for(let i=0;i<category.length;i++){
-                                str2=category[i].value;
-                                if(str1==str2){
-                                    category[i].checked=true;
-                                }   
+                            let str1 = all_user[i].todo[j].category;
+                            let str2 = "";
+                            for (let i = 0; i < category.length; i++) {
+                                str2 = category[i].value;
+                                if (str1 == str2) {
+                                    category[i].checked = true;
+                                }
                             }
 
-                            str1=all_user[i].todo[j].status;
-                            str2="";
-                            for(let i=0;i<status.length;i++){
-                                str2=status[i].value;
-                                if(str1==str2){
-                                    status[i].checked=true;
-                                }   
+                            str1 = all_user[i].todo[j].status;
+                            str2 = "";
+                            for (let i = 0; i < status.length; i++) {
+                                str2 = status[i].value;
+                                if (str1 == str2) {
+                                    status[i].checked = true;
+                                }
                             }
 
 
-                            str1=all_user[i].todo[j].reminder;
-                            str2="";
-                            for(let i=0;i<reminder.length;i++){
-                                str2=reminder[i].value;
-                                if(str1==str2){
-                                    reminder[i].checked=true;
-                                }   
+                            str1 = all_user[i].todo[j].reminder;
+                            str2 = "";
+                            for (let i = 0; i < reminder.length; i++) {
+                                str2 = reminder[i].value;
+                                if (str1 == str2) {
+                                    reminder[i].checked = true;
+                                }
                             }
 
-                            str1=all_user[i].todo[j].public;
-                            str2="";
-                            for(let i=0;i<public.length;i++){
-                                str2=public[i].value;
-                                if(str1==str2){
-                                    public[i].checked=true;
-                                }   
+                            str1 = all_user[i].todo[j].public;
+                            str2 = "";
+                            for (let i = 0; i < public.length; i++) {
+                                str2 = public[i].value;
+                                if (str1 == str2) {
+                                    public[i].checked = true;
+                                }
                             }
-                            
+
                             break;
-                            
+
                         }
                     }
                 }
@@ -776,109 +939,141 @@ function handelEdit(e) {
     }
 
 
-    
+
 
 
 
 
     edit_submit.addEventListener('click', () => {
 
-        
-    
-        reminder_text.classList.remove("dis");
-        reminder_alert.classList.remove("dis");
+        let edit_error = document.querySelector('.edit-error');
+
+
+
+
         let edit_name = getEditName();
         let edit_date = getEditDate();
         let edit_category = getEditCategory();
         let edit_status = getEditStatus();
         let edit_reminder = getEditReminder();
+        let edit_rem_date = getEditReminderDate();
         let edit_public = getEditPublic();
         // let edit_file = getEditFile();
 
-        item = item.querySelector('.id').innerHTML;
-        console.log(parseInt(item));
-        let user = sessionStorage.getItem(JSON.stringify("Users"));
-        user = JSON.parse(user);
+        if (c_edit_name == 1 && c_edit_edate == 1 && c_edit_rdate == 1) {
+            reminder_text.classList.remove("dis");
+            reminder_alert.classList.remove("dis");
+            edit_error.innerHTML = "";
+            item = item.querySelector('.id').innerHTML;
+            console.log(parseInt(item));
+            let user = sessionStorage.getItem(JSON.stringify("Users"));
+            user = JSON.parse(user);
 
-        let all_user = localStorage.getItem("Users");
-        all_user = JSON.parse(all_user);
+            let all_user = localStorage.getItem("Users");
+            all_user = JSON.parse(all_user);
 
-        let update_user;
-        let check = 0;
-        for (let i = 0; i < all_user.length; i++) {
-            for (const [key, value] of Object.entries(all_user[i])) {
-                if (all_user[i].email == user) {
-                    for (let j = 0; j < all_user[i].todo.length; j++) {
-                        for (const [key, value] of Object.entries(all_user[i].todo[j])) {
-                            if (all_user[i].todo[j].id == item) {
+            let update_user;
+            let check = 0;
+            for (let i = 0; i < all_user.length; i++) {
+                for (const [key, value] of Object.entries(all_user[i])) {
+                    if (all_user[i].email == user) {
+                        for (let j = 0; j < all_user[i].todo.length; j++) {
+                            for (const [key, value] of Object.entries(all_user[i].todo[j])) {
+                                if (all_user[i].todo[j].id == item) {
 
 
-                                if (edit_name != '') {
+                                    if (edit_name != '') {
 
-                                    all_user[i].todo[j].name = edit_name;
+                                        all_user[i].todo[j].name = edit_name;
 
+
+                                    }
+
+                                    if (edit_date != '') {
+
+                                        all_user[i].todo[j].end_date = edit_date;
+
+                                    }
+
+                                    if (edit_category != undefined) {
+
+                                        all_user[i].todo[j].category = edit_category;
+
+                                    }
+
+                                    if (edit_status != undefined) {
+
+                                        all_user[i].todo[j].status = edit_status;
+
+                                    }
+
+                                    if (edit_reminder != undefined) {
+
+                                        all_user[i].todo[j].reminder = edit_reminder;
+
+                                    }
+
+                                    if (edit_public != undefined) {
+
+                                        all_user[i].todo[j].public = edit_public;
+
+                                    }
+
+                                    if (edit_rem_date != '') {
+
+                                        all_user[i].todo[j].reminder_date = edit_rem_date;
+
+                                    }
+
+                                    // if (edit_file != undefined) {
+
+                                    //     all_user[i].todo[j].image = edit_file;
+
+                                    // }
+
+
+                                    localStorage.setItem("Users", JSON.stringify(all_user));
+                                    location.reload();
 
                                 }
+                                break;
 
-                                if (edit_date != '') {
-
-                                    all_user[i].todo[j].date = edit_date;
-
-                                }
-
-                                if (edit_category != undefined) {
-
-                                    all_user[i].todo[j].category = edit_category;
-
-                                }
-
-                                if (edit_status != undefined) {
-
-                                    all_user[i].todo[j].status = edit_status;
-
-                                }
-
-                                if (edit_reminder != undefined) {
-
-                                    all_user[i].todo[j].reminder = edit_reminder;
-
-                                }
-
-                                if (edit_public != undefined) {
-
-                                    all_user[i].todo[j].public = edit_public;
-
-                                }
-
-                                // if (edit_file != undefined) {
-
-                                //     all_user[i].todo[j].image = edit_file;
-
-                                // }
-
-
-                                localStorage.setItem("Users", JSON.stringify(all_user));
-                                location.reload();
 
                             }
-                            break;
-
-
                         }
+
+
+
+                        break;
                     }
+                    else {
 
-
-
-                    break;
-                }
-                else {
-
+                    }
                 }
             }
+            location.reload();
+        } else if (c_edit_name == 0 && c_edit_edate == 0 && c_edit_rdate == 0) {
+            edit_error.innerHTML = "Enter Name, Select date and reminder date";
+            edit_submit.disabled = true;
+
+        } else if (c_edit_name == 0) {
+            edit_error.innerHTML = "Enter Name";
+            edit_submit.disabled = true;
+
+        } else if (c_edit_edate == 0) {
+            edit_error.innerHTML = "Select date";
+            edit_submit.disabled = true;
+
+        } else if (c_edit_rdate == 0) {
+            edit_error.innerHTML = "Select reminder date";
+            edit_submit.disabled = true;
+
+
+        } else {
+
         }
-        location.reload();
     });
-    
+
 }
 
 
@@ -975,17 +1170,23 @@ function getFile() {
 
 let check_name = 0;
 let check_image = 0;
+let check_end_date = 0;
 
 let name = document.getElementById('name');
-name.addEventListener('keyup',()=>{
-    submit.disabled=false;
-})
+name.addEventListener('keyup', () => {
+    submit.disabled = false;
+});
+
+let end_date = document.getElementById('end-date');
+end_date.addEventListener('change', () => {
+    submit.disabled = false;
+});
 
 function getName() {
 
     let name = document.getElementById('name').value;
 
-    if (name =="") {
+    if (name == "") {
         check_name = 0;
     }
     else {
@@ -995,6 +1196,8 @@ function getName() {
 }
 let reminder = 0;
 function getReminderDate(id) {
+    reminder_text.classList.add("dis");
+    reminder_alert.classList.add("dis");
     console.log("inside getreminderdate");
     console.log(id);
     let = document.getElementById('form-rest').reset();
@@ -1020,7 +1223,7 @@ function getReminderDate(id) {
                         for (const [key, value] of Object.entries(all_user[i].todo[j])) {
                             if (key == "id" && all_user[i].todo[j].id == id) {
                                 console.log("inside last");
-                                all_user[i].todo[j].date = reminder_date;
+                                all_user[i].todo[j].reminder_date = reminder_date;
                             }
 
                         }
@@ -1038,7 +1241,7 @@ function getReminderDate(id) {
 
         show_date.classList.remove("enable-date");
         main_body.classList.remove("main");
-       location.reload();
+        location.reload();
 
     });
 
@@ -1047,7 +1250,19 @@ function getReminderDate(id) {
 
 }
 
+function getEndDate() {
+    let end_date = document.getElementById('end-date');
+    let today = new Date().toISOString().slice(0, 10);
+    end_date.setAttribute("min", today);
+    if (end_date.value == "") {
+        check_end_date = 0;
+    }
+    else {
+        check_end_date = 1;
+    }
+    return end_date.value;
 
+}
 
 
 function submitItem() {
@@ -1056,15 +1271,18 @@ function submitItem() {
     reminder_alert.classList.remove("dis");
 
     let item_name = getName();
-    let item_date = undefined;
+    let item_End_date = getEndDate();
     let item_category = getCategory();
     let item_status = getStatus();
     let item_reminder = getReminder();
+    let item_rem_date = undefined;
     let item_public = getPublic();
     let item_file = newFile;
     let item_id = 1;
 
-    if (check_name == 1 && check_image == 1) {
+    if (check_name == 1 && check_image == 1 && check_end_date == 1) {
+
+        add_end_date = item_End_date;
 
         let user = sessionStorage.getItem(JSON.stringify("Users"));
         user = JSON.parse(user);
@@ -1099,10 +1317,11 @@ function submitItem() {
         const item = {
             id: item_id,
             name: item_name,
-            date: item_date,
+            end_date: item_End_date,
             category: item_category,
             status: item_status,
             reminder: item_reminder,
+            reminder_date: item_rem_date,
             image: item_file,
             public: item_public
         };
@@ -1110,7 +1329,10 @@ function submitItem() {
         if (item_reminder == "yes") {
             pop_up.classList.remove("display-pop-up");
             show_date.classList.add("enable-date");
-            getReminderDate(item_id);
+            reminder_text.classList.remove("dis");
+            reminder_alert.classList.remove("dis");
+            getReminderDate(item_id, item_End_date);
+           
             // console.log("item date");
             // console.log(item_date);
 
@@ -1187,8 +1409,10 @@ function submitItem() {
    
     <label>Name:</label>
     <label class="name">${item.name}</label><br>
-    <label>Date:</label>
-    <label>${item.date}</label><br>
+    <label>End Date:</label>
+    <label>${item.end_date}</label><br>
+    <label>Reminder Date:</label>
+    <label>${item.reminder_date}</label><br>
     <label>Category:</label>
     <label>${item.category}</label><br>
     <label>Status:</label>
@@ -1207,23 +1431,27 @@ function submitItem() {
         // main_body.classList.remove("main");
 
     }
-    else{
-        submit.disabled=true;
-        let error=document.querySelector('.invalid-image');
-        if(check_image==0 && check_name==0){
-            error.innerHTML="Enter Name and select Image ";
+    else {
+        submit.disabled = true;
+        let error = document.querySelector('.invalid-image');
+        if (check_image == 0 && check_name == 0 && check_end_date == 0) {
+            error.innerHTML = "Enter Name, Select Image and Select End Date";
 
-        }else if(check_image==0){
-            error.innerHTML="select Image ";
+        } else if (check_name == 0) {
+            error.innerHTML = "Enter Name";
 
-        }else if(check_name==0){
-            error.innerHTML="Enter Name";
+        } else if (check_end_date == 0) {
+            error.innerHTML = "Select End Date";
+        }
+        else if (check_image == 0) {
+            error.innerHTML = "Select Image ";
 
         }
-        else{
+
+        else {
 
         }
-        
+
 
 
     }

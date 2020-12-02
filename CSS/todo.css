@@ -39,7 +39,12 @@ body{
 
 .add-item{
     margin-top: 50px;
+    
+   
 }
+
+
+
 .pop-up{
     border: 1px solid;
     padding: 10px;
@@ -53,7 +58,9 @@ body{
 }
 
 #del-check{
-    margin-left:350px;
+    
+    margin-left:400px;
+    display: none;
     
 }
 
@@ -61,7 +68,8 @@ body{
     padding-right: 40px;
 }
 ul{
-    padding-left:150px;
+    /* padding-left:150px;    */
+    display: block;
 }
 .edit-pop-up{
     border: 1px solid;
@@ -129,13 +137,22 @@ ul{
     top:30%;
 }
 
+.todo-list{
+    border: 1px solid black;
+    max-width: 400px;
+    padding-right: 30px;
+}
+
 li{
     /* display: flex; */
     /* flex-direction: column; */
     border: 1px solid;
     padding: 10px;
     box-shadow: 5px 10px #888888;
-    width: 30%;
+    /* max-width: 400px; */
+    margin-left: 20px;
+    /* margin-right: 100px; */
+    
     
 }
 
@@ -156,19 +173,28 @@ li{
 }
 
 .reminder-text{
-    position: absolute;
-    right:20%;
+    /* position: absolute; */
+    /* right:30%; */
     top:70%;
     color: red;
+    border: 1px solid black;
+    /* padding-left: 100px; */
+    padding-right: 100px;
+    /* margin-left: 400px; */
+    margin-left: 200px;
+    
     
    
 }
 
 .reminder-alert{
     position: absolute;
-    right:21%;
-    top:70%;
+    right:5%;
+    top:75%;
     color: red;
+    max-width: 600px;
+    /* margin-left: 300px; */
+    
   
    
     
@@ -182,7 +208,7 @@ li{
     box-shadow: 5px 10px #888888;
     width:100%; */
  
-    margin-top: 20%;
+    margin-top: 10%;
 
 }
 
@@ -199,6 +225,7 @@ li{
    padding: 10px;
    box-shadow: 5px 10px #888888;
    width:100%;
+   max-width: 400px;
 }
 .searchdate{
     display: none;
@@ -215,9 +242,10 @@ li{
 }
 
 .add{
-    margin-left: 150px;
+    /* margin-left: 150px; */
     font-size:x-large ;
     color: red;
+    text-align: center;
 }
 
 .reminer-empty{
@@ -233,4 +261,35 @@ li{
     margin-left: 150px;
     font-size:x-large ;
     color: red;
+}
+
+#name,#end-date{
+    margin-left:80px;
+}
+
+#end-date{
+    margin-left:58px;
+}
+
+
+#img{
+    margin-left:25px;
+}
+
+#refresh{
+    margin-left: 30px;
+}
+
+.reminder-not-found{
+    display: none;
+    font-size: x-large;
+    text-align: center;
+}
+
+#date-found{
+    display: none;
+    font-size: x-large;
+    text-align: center;
+    color:red;
+
 }

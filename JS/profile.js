@@ -189,6 +189,7 @@ function validateLastName() {
 
 
 let check = 0;
+let pwd_check=0;
 function checkPassword() {
      submitbtn.disabled = false;
 
@@ -214,6 +215,7 @@ function checkPassword() {
     }else{
         error_pwd.innerHTML=" ";
         check=0;
+        pwd_check=1;
     }
 
 
@@ -230,6 +232,7 @@ function checkPassword() {
 
 }
 
+let cpwd_check=0
 
 cpwd.addEventListener('blur', confirmPassword);
 let pwdcheck = 0
@@ -244,6 +247,7 @@ function confirmPassword() {
                 for (const [key, value] of Object.entries(all_user[i])) {
                     if (all_user[i].email == user) {
                         all_user[i].password = cpwd.value;
+                        cpwd_check=1;
                         break;
                     }
                 }
@@ -342,8 +346,18 @@ function submitDetails() {
 
     }
     else if (pwdcheck == 0 && check==0) {
+        if(pwd_check==0 && cpwd_check==0){
         localStorage.setItem("Users", JSON.stringify(all_user));
         alert("Profile Updated");
+        }else if(pwd_check==1 && cpwd_check==1){
+            localStorage.setItem("Users", JSON.stringify(all_user));
+        alert("Profile Updated");
+        }
+        else{
+            submitbtn.disabled=true;
+            error_submit.innerHTML = "Password Missmatch";
+
+        }
 
     }
     else {
