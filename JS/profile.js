@@ -25,6 +25,7 @@ const file = document.getElementById('profileimg');
 const error_pwd = document.querySelector('.error-pwd');
 const submitbtn = document.getElementById('submit');
 let error_submit = document.querySelector('.error-submit');
+let address1=document.getElementById('address');
 
 
 
@@ -35,9 +36,14 @@ lname.addEventListener('keyup', validateLastName);
 submitbtn.addEventListener('click', submitDetails);
 pwd.addEventListener('blur', checkPassword);
 address.addEventListener('blur', validateAddress);
+address1.addEventListener('keyup',enable_submit_btn);
 // file.addEventListener('change', ValidateUpdateProfile);
 
 
+
+function enable_submit_btn(){
+    submitbtn.disabled=false;
+}
 
 
 function load() {
@@ -342,6 +348,10 @@ function submitDetails() {
     radioValue();
     if(image_selected==1 && image_count==0){
         error_submit.innerHTML = "Invalid File";
+        submitbtn.disabled = true;
+
+    }else if(address1.value==''){
+        error_submit.innerHTML = "Enter Address";
         submitbtn.disabled = true;
 
     }

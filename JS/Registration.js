@@ -14,6 +14,7 @@ const cpwd=document.getElementById('cpwd');
 const address=document.getElementById('address');
 const file=document.getElementById('profileimg');
 const error_pwd=document.querySelector('.error-pwd');
+const address1=document.getElementById('address');
 
 const submitbtn=document.getElementById("submit");
 
@@ -22,8 +23,21 @@ fname.addEventListener('blur',validateFirstName);
 lname.addEventListener('blur',validateLastName);
 submitbtn.addEventListener('click',submitDetails);
 pwd.addEventListener('blur',checkPassword);
+// address1.addEventListener('keyup',enable_sub_btn);
 // file.addEventListener('click',checkValidImage);
 
+
+
+// function enable_sub_btn(){
+//     let check_address=0;
+//     submitbtn.disabled=false;
+//     if(address1.value==''){
+//         check_address=0;
+//     }else{
+//         check_address=1;
+//     }
+   
+// }
 
 
 function checkValidImage(){
