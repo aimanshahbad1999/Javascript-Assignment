@@ -2,7 +2,8 @@
 let main_check=0;
 const a=[];
 let newFile="";
-const regex_email = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+// const regex_email = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+const regex_email =/\S+@\S+\.\S+/;
 const regex_fname=/^[A-Za-z. ]+$/;
 const regex_lname=/^[A-Za-z. ]+$/;
 const email = document.getElementById('email');
