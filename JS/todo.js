@@ -627,7 +627,7 @@ function handelEvent(e) {
 
     }
 
-    if (e.target.name = 'check') {
+    if (e.target.name == 'check') {
 
         handelMultipleDelete(e);
 
@@ -639,8 +639,18 @@ function handelEvent(e) {
 function handelMultipleDelete(e) {
     // handelDel.style.display='block';
     let li_id = e.target.parentNode.querySelector('.id').innerHTML;
-    multi_li_del.push(parseInt(li_id));
+    if(multi_li_del.includes(parseInt(li_id))==true){
+        
+        console.log("inside true");
 
+        let idx=multi_li_del.indexOf(parseInt( li_id));
+        console.log("Id",idx);
+        multi_li_del.splice(idx,1);
+        console.log(multi_li_del);
+    }else{
+    multi_li_del.push(parseInt(li_id));
+    console.log(multi_li_del);
+    }
 
 }
 
